@@ -41,3 +41,7 @@ input[type="email"]::placeholder {
 .table td {
 	text-shadow: none;
 }
+.borderTD {
+	border-top-width: 1px !important;
+	border-bottom-width: 1px;
+}
