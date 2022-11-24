@@ -12,6 +12,32 @@ body {
 	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-h3 {
-	text-shadow: 2px 2px white;
+.fcontent {
+	width: fit-content;
+}
+
+input[type="email"]::placeholder {
+	text-align: center;
+}
+
+.divREST {
+	height: fit-content;
+	background-image: radial-gradient(
+		circle farthest-corner at 10% 20%,
+		rgba(0, 95, 104, 1) 0%,
+		rgba(15, 156, 168, 1) 90%
+	);
+	border-radius: 10px;
+	-webkit-box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.75);
+	color: white;
+	text-shadow: 2px 2px black;
+}
+.divREST table {
+	color: white;
+}
+
+.table td {
+	text-shadow: none;
 }

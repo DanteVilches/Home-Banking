@@ -12,82 +12,84 @@
 			crossorigin="anonymous"
 		/>
 		<link rel="stylesheet" href="./style.css" />
-		<title>Document</title>
+		<title>Client Manager | Minhub Brothers</title>
 	</head>
-	<body class="min-vh-100">
-		<div
-			id="app"
-			class="row-cols-4 d-flex justify-content-center mt-3 flex-column align-items-center min-vh-100"
-		>
-			<div class="col-4">
-				<div class="mb-3">
-					<form>
-						<h3>Client Manager</h3>
-						<div class="mb-3">
-							<label for="name" class="form-label">Name: </label>
-							<input
-								type="text"
-								class="form-control"
-								placeholder="David"
-								id="name"
-								v-model="inputName"
-							/>
-						</div>
-						<div class="mb-3">
-							<label for="lastName" class="form-label">Last name: </label>
-							<input
-								type="text"
-								class="form-control"
-								placeholder="Doe"
-								id="lastName"
-								v-model="inputLastName"
-							/>
-						</div>
-						<div class="mb-3">
-							<label for="email" class="form-label">Email address:</label>
-							<input
-								type="email"
-								class="form-control"
-								id="email"
-								placeholder="david@aol.com"
-								v-model="inputEmail"
-							/>
-						</div>
-						<div>
-							<button
-								type="submit"
-								class="btn btn-success"
-								@click.prevent="addClient()"
-							>
-								Add Client
-							</button>
-						</div>
-					</form>
+	<body>
+		<div id="app" class="row-cols-4 d-flex mt-3 justify-content-evenly flex-wrap">
+			<div class="d-flex flex-column col-6 p-3 ms-5 divREST">
+				<div class="d-flex justify-content-center">
+					<div class="mb-3 col-7">
+						<form>
+							<h3 class="text-center">Client Manager</h3>
+							<div class="mb-3">
+								<label for="name" class="form-label">Name: </label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Mike"
+									id="name"
+									v-model="inputName"
+								/>
+							</div>
+							<div class="mb-3">
+								<label for="lastName" class="form-label">Last name: </label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Ehrmantraut"
+									id="lastName"
+									v-model="inputLastName"
+								/>
+							</div>
+							<div class="mb-3">
+								<label for="email" class="form-label">Email address:</label>
+								<input
+									type="email"
+									class="form-control"
+									id="email"
+									placeholder="Mike_Ehrmantraut@mindhub.com"
+									v-model="inputEmail"
+								/>
+							</div>
+							<div>
+								<button
+									type="submit"
+									class="btn btn-success"
+									@click.prevent="addClient()"
+								>
+									Add Client
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div>
+					<table class="table-responsive table table-striped">
+						<thead>
+							<h3 class="text-center">Client list</h3>
+							<tr>
+								<th scope="col">First Name</th>
+								<th scope="col">Last Name</th>
+								<th scope="col">Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="client of clients">
+								<td class="text-white">{{client.clientName}}</td>
+								<td class="text-white">{{client.clientLastName}}</td>
+								<td class="text-white">{{client.clientEmail}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 
-			<div class="col-6">
-				<table class="table-responsive table table-striped">
-					<thead>
-						<h3 class="text-start">Client list</h3>
-						<tr>
-							<th scope="col">First Name</th>
-							<th scope="col">Last Name</th>
-							<th scope="col">Email</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="client of clients">
-							<td>{{client.clientName}}</td>
-							<td>{{client.clientLastName}}</td>
-							<td>{{client.clientEmail}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="col-6 min-vh-100">
-				<h3>Client REST response</h3>
-				<pre>{{backendJson}}</pre>
+			<div class="col-4 divREST d-flex justify-content-center p-3 ms-5">
+				<div class="w-100 d-flex align-items-center flex-column">
+					<h3>Client REST response</h3>
+					<pre class="w-100">{{backendJson}}</pre>
+				</div>
 			</div>
 		</div>
 

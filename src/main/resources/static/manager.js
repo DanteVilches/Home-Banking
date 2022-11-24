@@ -46,7 +46,6 @@ createApp({
 					icon: "success",
 					title: "Ha agregado un nuevo cliente",
 				});
-				this.loadData();
 			} else {
 				Swal.fire({
 					icon: "error",
@@ -54,6 +53,7 @@ createApp({
 					text: "Por favor rellene los campos",
 				});
 			}
+			this.loadData();
 		},
 		postClient(client) {
 			axios.post(this.url, client);
