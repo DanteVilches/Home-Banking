@@ -166,6 +166,13 @@ createApp({
 					title: `The ${dataType} has been edited`,
 				});
 			};
+			const sameValue = () => {
+				Swal.fire({
+					icon: "error",
+					title: `${dataType} is the same as before`,
+					text: "Please change the field",
+				});
+			};
 			const error = () => {
 				Swal.fire({
 					icon: "error",
@@ -173,9 +180,10 @@ createApp({
 					text: "Please complete the fields",
 				});
 			};
-			if (formValues) {
-				switch (dataType) {
-					case "First Name":
+
+			switch (dataType) {
+				case "First Name":
+					if (attribute != inputSwal) {
 						if (inputSwal) {
 							this.client = {
 								clientName: inputSwal,
@@ -184,23 +192,30 @@ createApp({
 						} else {
 							error();
 						}
+					} else {
+						sameValue();
+					}
 
-						break;
+					break;
 
-					case "Last Name":
+				case "Last Name":
+					if (attribute != inputSwal) {
 						if (inputSwal) {
 							this.client = {
 								clientLastName: inputSwal,
 							};
 							send();
 						} else {
-							console.log("LOL");
 							error();
 						}
+					} else {
+						sameValue();
+					}
 
-						break;
+					break;
 
-					case "Email":
+				case "Email":
+					if (attribute != inputSwal) {
 						if (inputSwal.includes("@") && inputSwal.includes(".") && inputSwal) {
 							this.client = {
 								clientEmail: inputSwal,
@@ -213,10 +228,12 @@ createApp({
 								text: "Please correct the email format",
 							});
 						}
+					} else {
+						sameValue();
+					}
 
-						break;
-					default:
-				}
+					break;
+				default:
 			}
 		},
 	},
