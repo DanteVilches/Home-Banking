@@ -32,11 +32,7 @@ createApp({
 				clientLastName: this.inputLastName,
 				clientEmail: this.inputEmail,
 			};
-			if (
-				this.inputName != "" &&
-				this.inputLastName != "" &&
-				this.inputEmail != ""
-			) {
+			if (this.inputName && this.inputLastName && this.inputEmail) {
 				if (this.inputEmail.includes("@") && this.inputEmail.includes(".")) {
 					this.postClient(this.client);
 					this.inputEmail = "";
@@ -118,11 +114,7 @@ createApp({
 					clientLastName: inputSwalLastName,
 					clientEmail: inputSwalEmail,
 				};
-				if (
-					inputSwalFirstName != "" &&
-					inputSwalLastName != "" &&
-					inputSwalEmail != ""
-				) {
+				if (inputSwalFirstName && inputSwalLastName && inputSwalEmail) {
 					if (inputSwalEmail.includes("@") && inputSwalEmail.includes(".")) {
 						axios
 							.put(`http://localhost:8080/clients/${id}`, this.client)
@@ -165,7 +157,7 @@ createApp({
 			});
 
 			let inputSwal = document.getElementById("swal-input").value;
-			const enviar = () => {
+			const send = () => {
 				axios
 					.patch(`http://localhost:8080/clients/${id}`, this.client)
 					.then((response) => this.loadData());
@@ -174,27 +166,54 @@ createApp({
 					title: `The ${dataType} has been edited`,
 				});
 			};
+			const error = () => {
+				Swal.fire({
+					icon: "error",
+					title: `${dataType} is Empty`,
+					text: "Please complete the fields",
+				});
+			};
 			if (formValues) {
 				switch (dataType) {
 					case "First Name":
-						this.client = {
-							clientName: inputSwal,
-						};
-						enviar();
+						if (inputSwal) {
+							this.client = {
+								clientName: inputSwal,
+							};
+							send();
+						} else {
+							error();
+						}
+
 						break;
 
 					case "Last Name":
-						this.client = {
-							clientLastName: inputSwal,
-						};
-						enviar();
+						if (inputSwal) {
+							this.client = {
+								clientLastName: inputSwal,
+							};
+							send();
+						} else {
+							console.log("LOL");
+							error();
+						}
+
 						break;
 
 					case "Email":
-						this.client = {
-							clientEmail: inputSwal,
-						};
-						enviar();
+						if (inputSwal.includes("@") && inputSwal.includes(".") && inputSwal) {
+							this.client = {
+								clientEmail: inputSwal,
+							};
+							send();
+						} else {
+							Swal.fire({
+								icon: "error",
+								title: "Email is not valid",
+								text: "Please correct the email format",
+							});
+						}
+
 						break;
 					default:
 				}
