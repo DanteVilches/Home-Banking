@@ -146,6 +146,82 @@ createApp({
 				}
 			}
 		},
+		async modifyOne(attribute, dataType, client) {
+			let idIndex = client._links.client.href.lastIndexOf("/");
+			let id = client._links.client.href.substring(idIndex + 1);
+			const { value: formValues } = await Swal.fire({
+				title: `Edit ${dataType}`,
+				html: `<label>${dataType}<input id="swal-input" class="swal2-input" value=${attribute}></label>`,
+				focusConfirm: false,
+				confirmButtonText: "Save",
+				confirmButtonColor: "#3085d6",
+				showCancelButton: true,
+				preConfirm: () => {
+					return document.getElementById("swal-input").value;
+				},
+			});
+
+			let inputSwal = document.getElementById("swal-input").value;
+			const enviar = () => {
+				axios
+					.patch(`http://localhost:8080/clients/${id}`, this.client)
+					.then((response) => this.loadData());
+				Swal.fire({
+					icon: "success",
+					title: "The client has been edited",
+				});
+			};
+			if (formValues) {
+				switch (dataType) {
+					case "First Name":
+						this.client = {
+							clientName: inputSwal,
+						};
+						enviar();
+						break;
+
+					case "Last Name":
+						this.client = {
+							clientLastName: inputSwal,
+						};
+						enviar();
+						break;
+
+					case "Email":
+						this.client = {
+							clientEmail: inputSwal,
+						};
+						enviar();
+						break;
+					default:
+				}
+			}
+		},
+		/* 
+		 	modifyOne(attribute, dataType, client) {
+			let idIndex = client._links.client.href.lastIndexOf("/");
+			let id = client._links.client.href.substring(idIndex + 1);
+			Swal.fire({
+				title: `Edit ${dataType}`,
+				html: `<input id="swal-input" class="swal2-input" value=${attribute}> `,
+
+				inputAttributes: {
+					autocapitalize: "off",
+				},
+				showCancelButton: true,
+				confirmButtonText: "Save",
+				confirmButtonColor: "#3085d6",
+				showLoaderOnConfirm: true,
+			}).then((result) => {
+				console.log(result);
+				if (result.isConfirmed) {
+					Swal.fire("Edited!", `The ${dataType} has been edited.`, "success");
+					axios
+						.patch(`http://localhost:8080/clients/${id}`, "hola")
+						.then((response) => this.loadData());
+				}
+			});
+		}, */
 	},
 	computed: {},
 }).mount("#app");

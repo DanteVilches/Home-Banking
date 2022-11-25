@@ -16,10 +16,6 @@ body {
 	width: fit-content;
 }
 
-input[type="email"]::placeholder {
-	text-align: center;
-}
-
 .divREST {
 	height: fit-content;
 	background-image: radial-gradient(
@@ -44,4 +40,14 @@ input[type="email"]::placeholder {
 .borderTD {
 	border-top-width: 1px !important;
 	border-bottom-width: 1px;
+}
+
+@media screen and (max-width: 1100px) {
+	.divREST {
+		width: 90% !important;
+		margin-bottom: 3rem;
+	}
+	.divTable {
+		overflow: scroll;
+	}
 }

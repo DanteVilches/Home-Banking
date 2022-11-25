@@ -12,7 +12,7 @@ public class Client {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO , generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id_client")
     private Long idClient;
@@ -25,7 +25,13 @@ public class Client {
     @Column(name= "client_email")
     private String clientEmail;
 
-
+    public Client() {
+    }
+    public Client( String clientName, String clientLastName, String clientEmail) {
+        this.clientName = clientName;
+        this.clientLastName = clientLastName;
+        this.clientEmail = clientEmail;
+    }
     public Long getIdClient() {
         return idClient;
     }
@@ -56,14 +62,8 @@ public class Client {
     }
 
 
-    public Client( String clientName, String clientLastName, String clientEmail) {
-        this.clientName = clientName;
-        this.clientLastName = clientLastName;
-        this.clientEmail = clientEmail;
-    }
 
-    public Client() {
-    }
+
 
 
 
