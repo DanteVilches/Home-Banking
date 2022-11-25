@@ -99,6 +99,8 @@ createApp({
 				confirmButtonText: "Save",
 				confirmButtonColor: "#3085d6",
 				showCancelButton: true,
+				allowEnterKey: true,
+				width: "39rem",
 				preConfirm: () => {
 					return [
 						document.getElementById("swal-input1").value,
@@ -156,6 +158,7 @@ createApp({
 				confirmButtonText: "Save",
 				confirmButtonColor: "#3085d6",
 				showCancelButton: true,
+				allowEnterKey: true,
 				preConfirm: () => {
 					return document.getElementById("swal-input").value;
 				},
@@ -168,7 +171,7 @@ createApp({
 					.then((response) => this.loadData());
 				Swal.fire({
 					icon: "success",
-					title: "The client has been edited",
+					title: `The ${dataType} has been edited`,
 				});
 			};
 			if (formValues) {
@@ -197,31 +200,6 @@ createApp({
 				}
 			}
 		},
-		/* 
-		 	modifyOne(attribute, dataType, client) {
-			let idIndex = client._links.client.href.lastIndexOf("/");
-			let id = client._links.client.href.substring(idIndex + 1);
-			Swal.fire({
-				title: `Edit ${dataType}`,
-				html: `<input id="swal-input" class="swal2-input" value=${attribute}> `,
-
-				inputAttributes: {
-					autocapitalize: "off",
-				},
-				showCancelButton: true,
-				confirmButtonText: "Save",
-				confirmButtonColor: "#3085d6",
-				showLoaderOnConfirm: true,
-			}).then((result) => {
-				console.log(result);
-				if (result.isConfirmed) {
-					Swal.fire("Edited!", `The ${dataType} has been edited.`, "success");
-					axios
-						.patch(`http://localhost:8080/clients/${id}`, "hola")
-						.then((response) => this.loadData());
-				}
-			});
-		}, */
 	},
 	computed: {},
 }).mount("#app");
