@@ -77,14 +77,12 @@ createApp({
 				if (result.isConfirmed) {
 					Swal.fire("Deleted!", "The client has been deleted.", "success");
 					axios
-						.delete(`http://localhost:8080/clients/${id}`)
+						.delete(client._links.client.href)
 						.then((response) => this.loadData());
 				}
 			});
 		},
 		async modifyClient(client) {
-			let idIndex = client._links.client.href.lastIndexOf("/");
-			let id = client._links.client.href.substring(idIndex + 1);
 			const { value: formValues } = await Swal.fire({
 				title: "Edit Client",
 				html:
@@ -117,7 +115,7 @@ createApp({
 				if (inputSwalFirstName && inputSwalLastName && inputSwalEmail) {
 					if (inputSwalEmail.includes("@") && inputSwalEmail.includes(".")) {
 						axios
-							.put(`http://localhost:8080/clients/${id}`, this.client)
+							.put(client._links.client.href, this.client)
 							.then((response) => this.loadData());
 
 						Swal.fire({
@@ -141,9 +139,7 @@ createApp({
 			}
 		},
 		async modifyOne(attribute, dataType, client) {
-			let idIndex = client._links.client.href.lastIndexOf("/");
-			let id = client._links.client.href.substring(idIndex + 1);
-			const { value: formValues } = await Swal.fire({
+			await Swal.fire({
 				title: `Edit ${dataType}`,
 				html: `<label>${dataType}<input id="swal-input" class="swal2-input" value=${attribute}></label>`,
 				focusConfirm: false,
@@ -159,7 +155,7 @@ createApp({
 			let inputSwal = document.getElementById("swal-input").value;
 			const send = () => {
 				axios
-					.patch(`http://localhost:8080/clients/${id}`, this.client)
+					.patch(client._links.client.href, this.client)
 					.then((response) => this.loadData());
 				Swal.fire({
 					icon: "success",
@@ -168,7 +164,7 @@ createApp({
 			};
 			const sameValue = () => {
 				Swal.fire({
-					icon: "error",
+					icon: "warning",
 					title: `${dataType} is the same as before`,
 					text: "Please change the field",
 				});
