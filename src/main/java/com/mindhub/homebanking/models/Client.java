@@ -1,11 +1,13 @@
 package com.mindhub.homebanking.models;
 
-import com.mindhub.homebanking.repositories.ClientRepository;
+
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
+
 
 import javax.persistence.*;
+import java.util.HashSet;
+
+import java.util.Set;
 
 @Entity
 public class Client {
@@ -22,6 +24,8 @@ public class Client {
 
     @Column(name= "client_email")
     private String clientEmail;
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    Set<Account> accounts = new HashSet<>();
 
     public Client() {
     }
@@ -60,8 +64,14 @@ public class Client {
     }
 
 
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
 
-
+    public void addAccount(Account account) {
+        account.setClient(this);
+        accounts.add(account);
+    }
 
 
 

@@ -9,7 +9,7 @@ createApp({
 			inputName: "",
 			inputLastName: "",
 			inputEmail: "",
-			url: "http://localhost:8080/clients",
+			url: "http://localhost:8080/rest/clients",
 		};
 	},
 	created() {
