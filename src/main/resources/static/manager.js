@@ -18,11 +18,11 @@ createApp({
 	methods: {
 		loadData() {
 			axios
-				.get(this.url)
+				.get("http://localhost:8080/api/clients")
 				.then((data) => {
 					this.backendJson = data.data;
 
-					this.clients = data.data._embedded.clients;
+					this.clients = data.data;
 				})
 				.catch((error) => console.log(error));
 		},
@@ -61,9 +61,7 @@ createApp({
 			axios.post(this.url, client).then((response) => this.loadData());
 		},
 		deleteClient(client) {
-			let idIndex = client._links.client.href.lastIndexOf("/");
-			let id = client._links.client.href.substring(idIndex + 1);
-
+			console.log(client);
 			Swal.fire({
 				title: "Are you sure that you want to delete this client?",
 				text: "You won't be able to revert this",
@@ -76,8 +74,14 @@ createApp({
 			}).then((result) => {
 				if (result.isConfirmed) {
 					Swal.fire("Deleted!", "The client has been deleted.", "success");
+					if (client.accountDTO.length != 0) {
+						client.accountDTO.forEach((element) => {
+							let aux = "http://localhost:8080/rest/accounts/" + element.accountId;
+							axios.delete(aux).then((response) => this.loadData());
+						});
+					}
 					axios
-						.delete(client._links.client.href)
+						.delete("http://localhost:8080/rest/clients/" + client.idClient)
 						.then((response) => this.loadData());
 				}
 			});
@@ -115,7 +119,10 @@ createApp({
 				if (inputSwalFirstName && inputSwalLastName && inputSwalEmail) {
 					if (inputSwalEmail.includes("@") && inputSwalEmail.includes(".")) {
 						axios
-							.put(client._links.client.href, this.client)
+							.put(
+								"http://localhost:8080/rest/clients/" + client.idClient,
+								this.client
+							)
 							.then((response) => this.loadData());
 
 						Swal.fire({
@@ -155,7 +162,10 @@ createApp({
 			let inputSwal = document.getElementById("swal-input").value;
 			const send = () => {
 				axios
-					.patch(client._links.client.href, this.client)
+					.patch(
+						"http://localhost:8080/rest/clients/" + client.idClient,
+						this.client
+					)
 					.then((response) => this.loadData());
 				Swal.fire({
 					icon: "success",
