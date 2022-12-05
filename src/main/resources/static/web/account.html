@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Accounts | Mindhub Brothers</title>
+		<title>Account | Mindhub Brothers</title>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -56,44 +56,6 @@
 							<defs></defs>
 							<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
 						</svg>
-					</button>
-					<button class="add-btn" title="Add New Project">
-						<svg
-							class="btn-icon feather feather-plus"
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="3"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<line x1="12" y1="5" x2="12" y2="19" />
-							<line x1="5" y1="12" x2="19" y2="12" />
-						</svg>
-					</button>
-					<button class="notification-btn">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							class="feather feather-bell"
-						>
-							<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-							<path d="M13.73 21a2 2 0 0 1-3.46 0" />
-						</svg>
-					</button>
-					<button class="profile-btn">
-						<!-- <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> -->
-						<span>{{clientName}}</span>
 					</button>
 				</div>
 				<button class="messages-btn">
@@ -193,106 +155,44 @@
 				</div>
 				<div class="projects-section">
 					<div class="projects-section-header">
-						<div>
-							<p>{{clientName}}</p>
-							<p>{{client.clientEmail}}</p>
-						</div>
+						<p>{{accountName}}</p>
+						<p class="time">{{Localtime}}</p>
 					</div>
-					<div class="projects-section">
-						<div class="projects-section-header">
-							<p>Accounts</p>
-							<p class="time">{{Localtime}}</p>
-						</div>
 
-						<div class="view-actions">
-							<button class="view-btn list-view" title="List View">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									class="feather feather-list"
-								>
-									<line x1="8" y1="6" x2="21" y2="6" />
-									<line x1="8" y1="12" x2="21" y2="12" />
-									<line x1="8" y1="18" x2="21" y2="18" />
-									<line x1="3" y1="6" x2="3.01" y2="6" />
-									<line x1="3" y1="12" x2="3.01" y2="12" />
-									<line x1="3" y1="18" x2="3.01" y2="18" />
-								</svg>
-							</button>
-							<button class="view-btn grid-view active" title="Grid View">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									class="feather feather-grid"
-								>
-									<rect x="3" y="3" width="7" height="7" />
-									<rect x="14" y="3" width="7" height="7" />
-									<rect x="14" y="14" width="7" height="7" />
-									<rect x="3" y="14" width="7" height="7" />
-								</svg>
-							</button>
-						</div>
-
-						<div class="project-boxes jsGridView">
-							<div class="project-box-wrapper" v-for="(account,index) in accounts">
-								<div
-									class="project-box"
-									:key="index"
-									:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
-								>
-									<div class="project-box-header">
-										<span>{{account.accountCreationDate.substring(0,10)}}</span>
-										<div class="more-wrapper dropstart">
-											<button class="project-btn-more" data-bs-toggle="dropdown">
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													width="24"
-													height="24"
-													viewBox="0 0 24 24"
-													fill="none"
-													stroke="currentColor"
-													stroke-width="2"
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													class="feather feather-more-vertical"
-												>
-													<circle cx="12" cy="12" r="1" />
-													<circle cx="12" cy="5" r="1" />
-													<circle cx="12" cy="19" r="1" />
-												</svg>
-											</button>
-
-											<ul class="dropdown-menu dropdown-menu-dark">
-												<li>
-													<a
-														class="dropdown-item"
-														:href="'./account.html?id='+account.accountId"
-														>Transactions</a
-													>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">{{account.accountNumber}}</p>
-										<p class="box-content-subheader fw-bold" style="font-size: 24px">
-											Balance ${{account.accountBalance}}
-										</p>
-									</div>
+					<div class="project-boxes jsListView">
+						<div class="project-box-wrapper" v-for="transaction in transactions">
+							<div
+								class="project-box"
+								style="background: #c8f7dc"
+								v-if="transaction.transactionType == 'CREDIT'"
+							>
+								<div class="project-box-header">
+									<span>{{transaction.transactionDate}}</span>
+								</div>
+								<div class="project-box-content-header">
+									<p class="box-content-header">
+										Description: {{transaction.transactionDescription}}
+									</p>
+									<p class="box-content-subheader fw-bold" style="font-size: 24px">
+										Amount: ${{transaction.transactionAmount}}
+									</p>
+								</div>
+							</div>
+							<div
+								class="project-box"
+								style="background: #ffd3e2"
+								v-if="transaction.transactionType == 'DEBIT'"
+							>
+								<div class="project-box-header">
+									<span>{{transaction.transactionDate}}</span>
+								</div>
+								<div class="project-box-content-header">
+									<p class="box-content-header">
+										Description: {{transaction.transactionDescription}}
+									</p>
+									<p class="box-content-subheader fw-bold" style="font-size: 24px">
+										Amount: ${{transaction.transactionAmount}}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -300,7 +200,6 @@
 				</div>
 			</div>
 		</div>
-
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
@@ -309,6 +208,6 @@
 		<script src="sweetalert2.all.min.js"></script>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script src="./javascript/accounts.js"></script>
+		<script src="./javascript/account.js"></script>
 	</body>
 </html>

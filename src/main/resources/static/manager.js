@@ -61,7 +61,6 @@ createApp({
 			axios.post(this.url, client).then((response) => this.loadData());
 		},
 		deleteClient(client) {
-			console.log(client);
 			Swal.fire({
 				title: "Are you sure that you want to delete this client?",
 				text: "You won't be able to revert this",

@@ -12,7 +12,6 @@ Vue.createApp({
 	created() {
 		this.loadData();
 		this.shuffle();
-		console.log(this.arrayOfColours[0]);
 		document.addEventListener("DOMContentLoaded", function () {
 			let modeSwitch = document.querySelector(".mode-switch");
 
