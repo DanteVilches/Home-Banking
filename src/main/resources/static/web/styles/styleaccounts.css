@@ -439,7 +439,6 @@ body {
 }
 .sidebar {
 	display: flex;
-	width: 200px;
 }
 .sidebarText {
 	padding: 40px 16px;
@@ -457,12 +456,12 @@ body {
 .app-sidebar-link {
 	color: var(--main-color);
 	color: var(--link-color);
-
+	width: fit-content;
 	transition: 0.2s;
 	border-radius: 50%;
 	margin: 16px 0;
 	flex-shrink: 0;
-	width: 40px;
+
 	height: 40px;
 	display: flex;
 	justify-content: center;
@@ -912,7 +911,7 @@ body {
 .sidebarLinks {
 	display: flex;
 	align-items: center;
-	width: 150px;
+	width: 130px;
 }
 .sidebarLinks a {
 	text-decoration: none;
