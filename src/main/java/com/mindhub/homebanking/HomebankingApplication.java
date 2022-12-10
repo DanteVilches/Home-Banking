@@ -13,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -44,10 +46,10 @@ public class HomebankingApplication {
 			lucy.addAccount(Vin004);
 			accountRepository.save(Vin004);
 
-			Transaction T001 = new Transaction( TransactionType.CREDIT, 25000D, "Y", LocalDateTime.now());
-			Transaction T002 = new Transaction( TransactionType.DEBIT, -1000D, "Loan", LocalDateTime.now());
-			Transaction T003 = new Transaction( TransactionType.CREDIT, 23000D, "a", LocalDateTime.now());
-			Transaction T004 = new Transaction( TransactionType.DEBIT,  -2500D, "b", LocalDateTime.now());
+			Transaction T001 = new Transaction( TransactionType.CREDIT, 25000D, "test", LocalDateTime.now());
+			Transaction T002 = new Transaction( TransactionType.DEBIT, 1000D, "test1", LocalDateTime.now());
+			Transaction T003 = new Transaction( TransactionType.CREDIT, 23000D, "test2", LocalDateTime.now());
+			Transaction T004 = new Transaction( TransactionType.DEBIT,  2500D, "test3", LocalDateTime.now());
 			Vin001.addTransaction(T001);
 			Vin001.addTransaction(T002);
 			Vin002.addTransaction(T003);

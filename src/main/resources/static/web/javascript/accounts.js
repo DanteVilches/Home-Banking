@@ -1,7 +1,7 @@
 Vue.createApp({
 	data() {
 		return {
-			Localtime: new Date().toJSON().slice(5, 10).replace(/-/g, "/"),
+			Localtime: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
 			url: "http://localhost:8080/api/clients/1",
 			client: {},
 			clientName: "",
@@ -11,7 +11,7 @@ Vue.createApp({
 	},
 	created() {
 		this.loadData();
-		this.shuffle();
+
 		document.addEventListener("DOMContentLoaded", function () {
 			let modeSwitch = document.querySelector(".mode-switch");
 
@@ -42,6 +42,7 @@ Vue.createApp({
 				gridView.classList.remove("active");
 				listView.classList.add("active");
 				projectsList.classList.remove("jsGridView");
+				projectsList.classList.remove("d-flex");
 				projectsList.classList.add("jsListView");
 			});
 
@@ -60,13 +61,25 @@ Vue.createApp({
 				.get(this.url)
 				.then((data) => {
 					this.client = data.data;
-					this.accounts = this.client.accountDTO;
+					this.accounts = this.client.accountDTO.sort(
+						(a, b) => a.accountId - b.accountId
+					);
 					this.clientName = `${this.client.clientName} ${this.client.clientLastName}`;
 				})
 				.catch((error) => console.log(error));
 		},
 		shuffle() {
 			return this.arrayOfColours.sort(() => Math.random() - 0.5);
+		},
+		formatDate(accountDate) {
+			const date = new Date(accountDate);
+			return date.toDateString().slice(3);
+		},
+		formatTime(accountDate) {
+			const date = new Date(accountDate);
+			let minutes =
+				date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
+			return date.getHours() + ":" + minutes;
 		},
 	},
 

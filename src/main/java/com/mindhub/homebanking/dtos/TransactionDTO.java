@@ -1,11 +1,11 @@
 package com.mindhub.homebanking.dtos;
 
-import com.mindhub.homebanking.models.Account;
+
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
 
 import java.time.LocalDateTime;
-import java.util.stream.Collectors;
+
 
 public class TransactionDTO {
 
