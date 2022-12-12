@@ -33,25 +33,6 @@ Vue.createApp({
 				document.documentElement.classList.remove("dark");
 				modeSwitch.classList.remove("active");
 			}
-
-			let listView = document.querySelector(".list-view");
-			let gridView = document.querySelector(".grid-view");
-			let projectsList = document.querySelector(".project-boxes");
-
-			listView.addEventListener("click", function () {
-				gridView.classList.remove("active");
-				listView.classList.add("active");
-				projectsList.classList.remove("jsGridView");
-				projectsList.classList.remove("d-flex");
-				projectsList.classList.add("jsListView");
-			});
-
-			gridView.addEventListener("click", function () {
-				gridView.classList.add("active");
-				listView.classList.remove("active");
-				projectsList.classList.remove("jsListView");
-				projectsList.classList.add("jsGridView");
-			});
 		});
 	},
 
@@ -61,10 +42,11 @@ Vue.createApp({
 				.get(this.url)
 				.then((data) => {
 					this.client = data.data;
+
 					this.accounts = this.client.accountDTO.sort(
 						(a, b) => a.accountId - b.accountId
 					);
-					this.clientName = `${this.client.clientName} ${this.client.clientLastName}`;
+					this.clientName = `${this.client.name} ${this.client.lastName}`;
 				})
 				.catch((error) => console.log(error));
 		},

@@ -1,12 +1,7 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.models.*;
+import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +11,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -25,7 +22,11 @@ public class HomebankingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository) {
+	public CommandLineRunner initData(ClientRepository clientRepository,
+									  AccountRepository accountRepository,
+									  TransactionRepository transactionRepository,
+									  LoanRepository loanRepository,
+									  ClientLoanRepository clientLoanRepository) {
 		return (args) -> {
 			Client melba = new Client("Melba", "Morel", "melba@mindhub.com");
 			clientRepository.save(melba);
@@ -59,7 +60,38 @@ public class HomebankingApplication {
 			transactionRepository.save(T002);
 			transactionRepository.save(T003);
 			transactionRepository.save(T004);
+			List<Integer> mortgagePayment = List.of(12,24,36,48,60);
+			List<Integer> personalPayment = List.of(6,12,24);
+			List<Integer> carLoanPayment = List.of(6,12,24,36);
+			Loan Mortgage = new Loan("Mortgage",500000.00D, mortgagePayment);
+			Loan Personal = new Loan("Personal",100000.00D, personalPayment);
+			Loan carLoan = new Loan("Car Loan",300000.00D, carLoanPayment);
 
+			ClientLoan mortgageMelba = new ClientLoan(400000.20D, mortgagePayment.get(4), new Date());
+			ClientLoan personalMelba = new ClientLoan(50000.10D, personalPayment.get(1), new Date());
+			ClientLoan personalMartin = new ClientLoan(100000.70D,personalPayment.get(2),new Date());
+			ClientLoan carLoanMartin = new ClientLoan(200000.50D,carLoanPayment.get(3),new Date());
+			melba.addClientLoan(mortgageMelba);
+			melba.addClientLoan(personalMelba);
+			martin.addClientLoan(personalMartin);
+			martin.addClientLoan(carLoanMartin);
+
+
+			Personal.addClientLoan(personalMelba);
+			Mortgage.addClientLoan(mortgageMelba);
+			Personal.addClientLoan(personalMartin);
+			carLoan.addClientLoan(carLoanMartin);
+
+
+
+			loanRepository.save(Mortgage);
+			loanRepository.save(Personal);
+			loanRepository.save(carLoan);
+
+			clientLoanRepository.save(mortgageMelba);
+			clientLoanRepository.save(personalMelba);
+			clientLoanRepository.save(personalMartin);
+			clientLoanRepository.save(carLoanMartin);
 		};
 	}
 

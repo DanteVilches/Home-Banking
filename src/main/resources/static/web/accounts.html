@@ -53,7 +53,7 @@
 					<div class="app-sidebar">
 						<div class="sidebarLinks">
 							<a href="" class="app-sidebar-link active">
-								<div>
+								<div class="ms-2">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width="24"
@@ -70,13 +70,13 @@
 										<polyline points="9 22 9 12 15 12 15 22" />
 									</svg>
 								</div>
-								<div>Accounts</div>
+								<div class="ms-2 me-3">Accounts</div>
 							</a>
 							<a href="" class="sidebarLinkActive"></a>
 						</div>
 						<div class="sidebarLinks">
 							<a href="" class="app-sidebar-link">
-								<div>
+								<div class="ms-2">
 									<svg
 										class="link-icon feather feather-pie-chart"
 										xmlns="http://www.w3.org/2000/svg"
@@ -93,12 +93,12 @@
 										<path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
 									</svg>
 								</div>
-								<div>Loans</div>
+								<div class="ms-2 me-3">Loans</div>
 							</a>
 						</div>
-						<div class="sidebarLinks">
+						<div class="sidebarLinks w-100">
 							<a href="" class="app-sidebar-link">
-								<div>
+								<div class="ms-2">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width="24"
@@ -117,12 +117,12 @@
 										<line x1="3" y1="10" x2="21" y2="10" />
 									</svg>
 								</div>
-								<div>Credit cards</div>
+								<div class="ms-2 me-3">Credit cards</div>
 							</a>
 						</div>
 						<div class="sidebarLinks">
 							<a href="" class="app-sidebar-link">
-								<div>
+								<div class="ms-2">
 									<svg
 										class="link-icon feather feather-settings"
 										xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@
 										/>
 									</svg>
 								</div>
-								<div>Settings</div>
+								<div class="ms-2 me-3">Settings</div>
 							</a>
 						</div>
 					</div>
@@ -171,42 +171,20 @@
 											>{{formatDate(account.accountCreationDate)}}
 											{{formatTime(account.accountCreationDate)}}</span
 										>
-										<div class="more-wrapper dropstart">
-											<button class="project-btn-more" data-bs-toggle="dropdown">
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													width="24"
-													height="24"
-													viewBox="0 0 24 24"
-													fill="none"
-													stroke="currentColor"
-													stroke-width="2"
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													class="feather feather-more-vertical"
-												>
-													<circle cx="12" cy="12" r="1" />
-													<circle cx="12" cy="5" r="1" />
-													<circle cx="12" cy="19" r="1" />
-												</svg>
-											</button>
-
-											<ul class="dropdown-menu dropdown-menu-dark">
-												<li>
-													<a
-														class="dropdown-item"
-														:href="'./account.html?id='+account.accountId"
-														>Transactions</a
-													>
-												</li>
-											</ul>
-										</div>
 									</div>
 									<div class="project-box-content-header">
 										<p class="box-content-header">{{account.accountNumber}}</p>
 										<p class="box-content-subheader fw-bold" style="font-size: 24px">
 											Balance ${{account.accountBalance}}
 										</p>
+									</div>
+									<div class="d-flex justify-content-center">
+										<a
+											:href="'./account.html?id='+account.accountId"
+											type="button"
+											class="btn btn-dark"
+											>Transactions</a
+										>
 									</div>
 								</div>
 							</div>
