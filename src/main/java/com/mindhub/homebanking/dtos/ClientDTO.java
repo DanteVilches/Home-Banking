@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class ClientDTO{
 
     private Long id;
-    private String name;
+    private String firstName;
     private String lastName;
     private String email;
     private Set<ClientLoanDTO> loans;
@@ -17,7 +17,7 @@ public class ClientDTO{
 
     public ClientDTO(Client client) {
         this.id = client.getId();
-        this.name = client.getName();
+        this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
         this.loans = client.getClientLoans().stream().map(loans -> new ClientLoanDTO(loans)).collect(Collectors.toSet());
@@ -29,7 +29,7 @@ public class ClientDTO{
     }
 
     public String getName() {
-        return name;
+        return firstName;
     }
 
     public String getLastName() {

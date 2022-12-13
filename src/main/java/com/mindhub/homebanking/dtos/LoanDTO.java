@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mindhub.homebanking.models.Loan;
 
 import java.util.List;
@@ -41,6 +42,8 @@ public class LoanDTO {
     public List<Integer> getPayments() {
         return payments;
     }
+
+
     public Set<ClientLoanDTO> getClientLoanDTO(){
         return clientLoanDTO;
     }

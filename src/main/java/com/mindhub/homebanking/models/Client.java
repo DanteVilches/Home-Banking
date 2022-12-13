@@ -19,7 +19,7 @@ public class Client {
     @Column(name = "id_client")
     private Long id;
 
-    private String name;
+    private String firstName;
 
     private String lastName;
 
@@ -33,8 +33,8 @@ public class Client {
 
     public Client() {
     }
-    public Client( String name, String lastName, String email) {
-        this.name = name;
+    public Client( String firstName, String lastName, String email) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
@@ -43,12 +43,12 @@ public class Client {
     }
 
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

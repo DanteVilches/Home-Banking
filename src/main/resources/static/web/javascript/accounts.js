@@ -46,7 +46,7 @@ Vue.createApp({
 					this.accounts = this.client.accountDTO.sort(
 						(a, b) => a.accountId - b.accountId
 					);
-					this.clientName = `${this.client.name} ${this.client.lastName}`;
+					this.clientName = `${this.client.firstName} ${this.client.lastName}`;
 				})
 				.catch((error) => console.log(error));
 		},

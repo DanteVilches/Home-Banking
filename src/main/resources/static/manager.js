@@ -28,9 +28,9 @@ createApp({
 		},
 		addClient() {
 			this.client = {
-				clientName: this.inputName,
-				clientLastName: this.inputLastName,
-				clientEmail: this.inputEmail,
+				firstName: this.inputName,
+				lastName: this.inputLastName,
+				email: this.inputEmail,
 			};
 			if (this.inputName && this.inputLastName && this.inputEmail) {
 				if (this.inputEmail.includes("@") && this.inputEmail.includes(".")) {
@@ -73,14 +73,14 @@ createApp({
 			}).then((result) => {
 				if (result.isConfirmed) {
 					Swal.fire("Deleted!", "The client has been deleted.", "success");
-					if (client.accountDTO.length != 0) {
+					/* 	if (client.accountDTO.length != 0) {
 						client.accountDTO.forEach((element) => {
 							let aux = "http://localhost:8080/rest/accounts/" + element.accountId;
 							axios.delete(aux).then((response) => this.loadData());
 						});
-					}
+					} */
 					axios
-						.delete("http://localhost:8080/rest/clients/" + client.idClient)
+						.delete("http://localhost:8080/rest/clients/" + client.id)
 						.then((response) => this.loadData());
 				}
 			});
@@ -89,9 +89,9 @@ createApp({
 			const { value: formValues } = await Swal.fire({
 				title: "Edit Client",
 				html:
-					`<label>First Name<input id="swal-input1" class="swal2-input" value=${client.clientName}></label>` +
-					`<label>Last Name<input id="swal-input2" class="swal2-input" value=${client.clientLastName}></label>` +
-					`<label>Client Email<input type="email "id="swal-input3" class="swal2-input" value=${client.clientEmail}></></label>`,
+					`<label>First Name<input id="swal-input1" class="swal2-input" value=${client.firstName}></label>` +
+					`<label>Last Name<input id="swal-input2" class="swal2-input" value=${client.lastName}></label>` +
+					`<label>Client Email<input type="email "id="swal-input3" class="swal2-input" value=${client.email}></></label>`,
 				focusConfirm: false,
 				confirmButtonText: "Save",
 				confirmButtonColor: "#3085d6",
@@ -111,17 +111,14 @@ createApp({
 			let inputSwalEmail = document.getElementById("swal-input3").value;
 			if (formValues) {
 				this.client = {
-					clientName: inputSwalFirstName,
-					clientLastName: inputSwalLastName,
-					clientEmail: inputSwalEmail,
+					firstName: inputSwalFirstName,
+					lastName: inputSwalLastName,
+					email: inputSwalEmail,
 				};
 				if (inputSwalFirstName && inputSwalLastName && inputSwalEmail) {
 					if (inputSwalEmail.includes("@") && inputSwalEmail.includes(".")) {
 						axios
-							.put(
-								"http://localhost:8080/rest/clients/" + client.idClient,
-								this.client
-							)
+							.put("http://localhost:8080/rest/clients/" + client.id, this.client)
 							.then((response) => this.loadData());
 
 						Swal.fire({
@@ -161,10 +158,7 @@ createApp({
 			let inputSwal = document.getElementById("swal-input").value;
 			const send = () => {
 				axios
-					.patch(
-						"http://localhost:8080/rest/clients/" + client.idClient,
-						this.client
-					)
+					.patch("http://localhost:8080/rest/clients/" + client.id, this.client)
 					.then((response) => this.loadData());
 				Swal.fire({
 					icon: "success",
@@ -191,7 +185,7 @@ createApp({
 					if (attribute != inputSwal) {
 						if (inputSwal) {
 							this.client = {
-								clientName: inputSwal,
+								firstName: inputSwal,
 							};
 							send();
 						} else {
@@ -207,7 +201,7 @@ createApp({
 					if (attribute != inputSwal) {
 						if (inputSwal) {
 							this.client = {
-								clientLastName: inputSwal,
+								lastName: inputSwal,
 							};
 							send();
 						} else {
@@ -223,7 +217,7 @@ createApp({
 					if (attribute != inputSwal) {
 						if (inputSwal.includes("@") && inputSwal.includes(".") && inputSwal) {
 							this.client = {
-								clientEmail: inputSwal,
+								email: inputSwal,
 							};
 							send();
 						} else {
