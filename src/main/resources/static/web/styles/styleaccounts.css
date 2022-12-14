@@ -97,6 +97,9 @@ body {
 .creditCard {
 	background: inherit;
 }
+.getALoan {
+	width: 84px !important;
+}
 .card {
 	width: 320px;
 	height: 190px;
@@ -480,7 +483,7 @@ body {
 	background-color: var(--projects-section);
 	border-radius: 32px;
 	padding: 32px 32px 0 32px;
-	overflow: hidden;
+	overflow: auto;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -551,14 +554,6 @@ body {
 
 .project-boxes {
 	margin: 0 -8px;
-	overflow-y: auto;
-}
-.project-boxes.jsGridView {
-	display: flex;
-	flex-wrap: wrap;
-}
-.project-boxes.jsGridView .project-box-wrapper {
-	width: 33.3%;
 }
 .project-boxes.jsListView .project-box {
 	display: flex;
@@ -609,6 +604,16 @@ body {
 	flex: 1;
 }
 
+.project-boxes.jsGridView {
+	display: flex;
+	flex-wrap: wrap;
+}
+.project-boxes.jsGridView .project-box-wrapper {
+	width: 33.3%;
+}
+.marginLeft {
+	margin-left: 16px !important;
+}
 .project-box {
 	--main-color-card: #dbf6fd;
 	border-radius: 30px;
@@ -667,33 +672,6 @@ body {
 	font-size: 14px;
 	line-height: 24px;
 	opacity: 0.7;
-}
-
-.box-progress {
-	display: block;
-	height: 4px;
-	border-radius: 6px;
-}
-.box-progress-bar {
-	width: 100%;
-	height: 4px;
-	border-radius: 6px;
-	overflow: hidden;
-	background-color: #fff;
-	margin: 8px 0;
-}
-.box-progress-header {
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 16px;
-	margin: 0;
-}
-.box-progress-percentage {
-	text-align: right;
-	margin: 0;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 16px;
 }
 
 .project-box-footer {
@@ -842,7 +820,13 @@ body {
 	.profile-btn span {
 		display: none;
 	}
-
+	.sidebar,
+	.app-icon {
+		display: none !important;
+	}
+	.app-content {
+		padding: 16px 12px 24px 12px;
+	}
 	.add-btn,
 	.notification-btn,
 	.mode-switch {
@@ -862,6 +846,9 @@ body {
 	.tittle {
 		margin: 0 !important;
 		font-size: 25px !important;
+	}
+	.project-boxes.jsGridView .project-box-wrapper {
+		width: 100%;
 	}
 }
 @media screen and (max-width: 520px) {

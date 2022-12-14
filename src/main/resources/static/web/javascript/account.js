@@ -67,6 +67,14 @@ const app = createApp({
 				date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
 			return date.getHours() + ":" + minutes;
 		},
+		formatCurrency(money) {
+			let USDollar = new Intl.NumberFormat("en-US", {
+				style: "currency",
+				currency: "USD",
+			});
+
+			return USDollar.format(money);
+		},
 	},
 
 	computed: {},

@@ -28,7 +28,7 @@ public class ClientDTO{
         return id;
     }
 
-    public String getName() {
+    public String getFirstName() {
         return firstName;
     }
 

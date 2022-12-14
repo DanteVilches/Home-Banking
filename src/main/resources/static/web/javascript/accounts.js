@@ -6,6 +6,8 @@ Vue.createApp({
 			client: {},
 			clientName: "",
 			accounts: [],
+			loans: [],
+			logo: "./images/bank logo.png",
 			arrayOfColours: ["#fee4cb", "#e9e7fd", "#ffd3e2", "#c8f7dc", "#d5deff"],
 		};
 	},
@@ -29,9 +31,11 @@ Vue.createApp({
 			if (localStorage.getItem("dark-mode") === "true") {
 				document.documentElement.classList.add("dark");
 				modeSwitch.classList.add("active");
+				this.logo = "./images/bank logo.png";
 			} else {
 				document.documentElement.classList.remove("dark");
 				modeSwitch.classList.remove("active");
+				this.logo = "./images/bank logo black.png";
 			}
 		});
 	},
@@ -46,6 +50,8 @@ Vue.createApp({
 					this.accounts = this.client.accountDTO.sort(
 						(a, b) => a.accountId - b.accountId
 					);
+					this.loans = this.client.loans.sort((a, b) => a.id - b.id);
+					console.log(this.loans);
 					this.clientName = `${this.client.firstName} ${this.client.lastName}`;
 				})
 				.catch((error) => console.log(error));
@@ -62,6 +68,22 @@ Vue.createApp({
 			let minutes =
 				date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
 			return date.getHours() + ":" + minutes;
+		},
+		formatCurrency(money) {
+			let USDollar = new Intl.NumberFormat("en-US", {
+				style: "currency",
+				currency: "USD",
+			});
+
+			return USDollar.format(money);
+		},
+
+		changeLogoColor() {
+			if (document.documentElement.classList.contains("dark")) {
+				this.logo = "./images/bank logo black.png";
+			} else {
+				this.logo = "./images/bank logo.png";
+			}
 		},
 	},
 

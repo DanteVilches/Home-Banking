@@ -148,7 +148,7 @@
 						<p class="time">{{Localtime}}</p>
 					</div>
 					<div class="projects-section-header">
-						<p>Balance: ${{accountBalance}}</p>
+						<p>Balance: {{formatCurrency(accountBalance)}}</p>
 					</div>
 					<div class="project-boxes jsListView">
 						<div class="project-box-wrapper" v-for="transaction in transactions">
@@ -168,7 +168,7 @@
 										Description: {{transaction.transactionDescription}}
 									</p>
 									<p class="box-content-subheader fw-bold" style="font-size: 24px">
-										Amount: ${{transaction.transactionAmount}}
+										Amount: {{formatCurrency(transaction.transactionAmount)}}
 									</p>
 									<p
 										class="box-content-subheader fw-bold text-success"
@@ -194,7 +194,7 @@
 										Description: {{transaction.transactionDescription}}
 									</p>
 									<p class="box-content-subheader fw-bold" style="font-size: 24px">
-										Amount: ${{transaction.transactionAmount}}
+										Amount: {{formatCurrency(transaction.transactionAmount)}}
 									</p>
 									<span>
 										<p
