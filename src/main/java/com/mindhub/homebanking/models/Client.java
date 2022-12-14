@@ -86,9 +86,11 @@ public class Client {
         clientLoans.add(clientLoan);
     }
 
+/*
     public List<Loan> getLoans() {
         return clientLoans.stream().map(loan -> loan.getLoan()).collect(Collectors.toList());
     }
+*/
 
 
 

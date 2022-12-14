@@ -71,7 +71,7 @@ public class Loan {
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);
     }
-    public List<Client> getClients() {
-        return clientLoans.stream().map(client -> client.getClient()).collect(Collectors.toList());
-    }
+//    public List<Client> getClients() {
+//        return clientLoans.stream().map(client -> client.getClient()).collect(Collectors.toList());
+//    }
 }

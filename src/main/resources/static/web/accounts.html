@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<div class="app-content">
-				<div class="sidebar">
+				<div class="sidebar" id="overlay">
 					<div class="app-sidebar">
 						<div class="sidebarLinks">
 							<a href="" class="app-sidebar-link active">
@@ -151,29 +151,32 @@
 								<div class="ms-2 me-3">Settings</div>
 							</a>
 						</div>
-						<div class="sidebarLinks">
-							<a href="" class="app-sidebar-link">
-								<div class="ms-2">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										fill="currentColor"
-										class="bi bi-box-arrow-left"
-										viewBox="0 0 16 16"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"
-										/>
-										<path
-											fill-rule="evenodd"
-											d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
-										/>
-									</svg>
-								</div>
-								<div class="ms-2 me-3">Logout</div>
-							</a>
+
+						<div class="d-flex flex-column sideBarLogOut">
+							<div class="sidebarLinks">
+								<a href="" class="app-sidebar-link">
+									<div class="ms-2">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											fill="currentColor"
+											class="bi bi-box-arrow-left"
+											viewBox="0 0 16 16"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"
+											/>
+											<path
+												fill-rule="evenodd"
+												d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
+											/>
+										</svg>
+									</div>
+									<div class="ms-2 me-3">Logout</div>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -184,36 +187,74 @@
 							<p class="time">{{Localtime}}</p>
 						</div>
 
-						<div class="project-boxes jsGridView d-flex justify-content-center">
-							<div class="project-box-wrapper" v-for="(account,index) in accounts">
+						<div class="d-flex flex-column gap-3">
+							<div class="project-boxes jsGridView d-flex justify-content-center">
+								<div class="project-box-wrapper" v-for="(account,index) in accounts">
+									<div
+										class="project-box"
+										:key="index"
+										:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
+									>
+										<div class="project-box-header">
+											<span
+												>{{formatDate(account.accountCreationDate)}}
+												{{formatTime(account.accountCreationDate)}}</span
+											>
+										</div>
+										<div class="project-box-content-header">
+											<p class="box-content-header">{{account.accountNumber}}</p>
+											<p class="box-content-subheader fw-bold" style="font-size: 24px">
+												Balance {{formatCurrency(account.accountBalance)}}
+											</p>
+										</div>
+										<div class="d-flex justify-content-center">
+											<a
+												:href="'./account.html?id='+account.accountId"
+												type="button"
+												class="btn btn-dark"
+												>Transactions</a
+											>
+										</div>
+									</div>
+								</div>
+
+								<div v-if="accounts.length == 0">
+									<h1 class="tittle">No accounts on this client</h1>
+								</div>
+							</div>
+							<div class="align-self-center" v-if="accounts.length < 3">
 								<div
-									class="project-box"
+									class="project-box d-flex justify-content-center align-items-center"
 									:key="index"
 									:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
 								>
-									<div class="project-box-header">
-										<span
-											>{{formatDate(account.accountCreationDate)}}
-											{{formatTime(account.accountCreationDate)}}</span
+									<a
+										href=""
+										class="d-flex flex-column align-items-center"
+										style="text-decoration: none; color: black"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="32"
+											height="32"
+											fill="black"
+											class="bi bi-patch-plus"
+											viewBox="0 0 16 16"
 										>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">{{account.accountNumber}}</p>
-										<p class="box-content-subheader fw-bold" style="font-size: 24px">
-											Balance {{formatCurrency(account.accountBalance)}}
-										</p>
-									</div>
-									<div class="d-flex justify-content-center">
-										<a
-											:href="'./account.html?id='+account.accountId"
-											type="button"
-											class="btn btn-dark"
-											>Transactions</a
-										>
-									</div>
+											<path
+												fill-rule="evenodd"
+												d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"
+											/>
+											<path
+												d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"
+											/>
+										</svg>
+										<p>Add a new account</p>
+									</a>
 								</div>
 							</div>
 						</div>
+
 						<div class="d-flex mt-5 mb-5">
 							<div class="projects-section-header">
 								<div>
@@ -221,7 +262,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="project-boxes jsGridView d-flex justify-content-center mt-5">
+						<div
+							class="project-boxes jsGridView d-flex justify-content-center mt-5 paddingLoan"
+						>
 							<div class="project-box-wrapper" v-for="(loan,index) in loans">
 								<div
 									class="project-box"
@@ -241,6 +284,9 @@
 										<p class="box-content-header">Payment: {{loan.payment}}</p>
 									</div>
 								</div>
+							</div>
+							<div v-if="loans.length == 0">
+								<h1 class="tittle">No accounts on this client</h1>
 							</div>
 						</div>
 					</div>

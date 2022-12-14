@@ -19,6 +19,8 @@ const app = createApp({
 		let params = new URLSearchParams(queryString);
 		this.id = params.get("id");
 		this.loadData();
+		this.loadAllAccounts();
+		console.log(this.accounts);
 		document.addEventListener("DOMContentLoaded", function () {
 			let modeSwitch = document.querySelector(".mode-switch");
 
@@ -48,6 +50,7 @@ const app = createApp({
 				.get("http://localhost:8080/api/accounts/" + this.id)
 				.then((data) => {
 					this.account = data.data;
+					console.log(this.account);
 					this.accountName = this.account.accountNumber;
 					this.accountBalance = this.account.accountBalance;
 					this.transactions = this.account.transactionDTO.sort(
@@ -56,6 +59,12 @@ const app = createApp({
 				})
 
 				.catch((error) => console.log(error));
+		},
+		loadAllAccounts() {
+			axios.get("http://localhost:8080/api/clients/" + this.id).then((json) => {
+				this.accounts = json.data.accountDTO;
+				console.log(this.accounts);
+			});
 		},
 		formatDate(transactionDate) {
 			const date = new Date(transactionDate);
