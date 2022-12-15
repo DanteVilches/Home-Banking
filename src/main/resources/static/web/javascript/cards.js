@@ -5,12 +5,13 @@ const app = createApp({
 		return {
 			accounts: [],
 			account: [],
+			cards: [],
 			id: "",
 			transactions: [],
 			accountName: "",
 			clientName: "",
-			accountBalance: "",
 			logo: "./images/bank logo.png",
+			accountBalance: "",
 			Localtime: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
 			type: "",
 		};
@@ -65,6 +66,7 @@ const app = createApp({
 		},
 		loadAllAccounts() {
 			axios.get("http://localhost:8080/api/clients/1").then((json) => {
+				this.cards = json.data.cardDTO.sort((a, b) => a.id - b.id);
 				this.accounts = json.data.accountDTO.sort(
 					(a, b) => a.accountId - b.accountId
 				);

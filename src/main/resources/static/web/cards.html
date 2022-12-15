@@ -22,7 +22,7 @@
 					<p class="app-name">Mindhub Brothers</p>
 				</div>
 				<div class="app-header-mid">
-					<p class="tittle">Account</p>
+					<p class="tittle">Cards</p>
 				</div>
 				<div class="app-header-right">
 					<button class="mode-switch" title="Switch Theme" @click="changeLogoColor">
@@ -74,7 +74,7 @@
 							<a href="" class="sidebarLinkActive"></a>
 						</div>
 						<div class="sidebarLinks w-100">
-							<a href="./cards.html?id=1" class="app-sidebar-link">
+							<a href="" class="app-sidebar-link active">
 								<div class="ms-2">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -180,96 +180,173 @@
 					</div>
 				</div>
 				<div class="projects-section">
-					<div class="projects-section-header">
-						<div class="d-flex">
-							<p style="font-size: 32px">{{accountName}}</p>
-							<button
-								type="button"
-								class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split ms-2"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-								<span class="visually-hidden">Toggle Dropdown</span>
-							</button>
-
-							<ul class="dropdown-menu dropdown-menu-dark">
-								<div v-for="account in accounts">
-									<li v-if="account.accountNumber != accountName ">
-										<a
-											:href="'./account.html?id='+account.accountId"
-											class="dropdown-item"
-											>{{account.accountNumber}}</a
-										>
-									</li>
-								</div>
-							</ul>
-						</div>
-
+					<div class="projects-section-header d-flex justify-content-end">
 						<p class="time">{{Localtime}}</p>
 					</div>
-					<div class="projects-section-header">
-						<p>Balance: {{formatCurrency(accountBalance)}}</p>
-					</div>
-					<div class="project-boxes jsListView">
-						<div class="project-box-wrapper" v-for="transaction in transactions">
-							<div
-								class="project-box"
-								style="background: #c8f7dc"
-								v-if="transaction.transactionType == 'CREDIT'"
-							>
-								<div class="project-box-header">
-									<span
-										>{{formatDate(transaction.transactionDate)}}
-										{{formatTime(transaction.transactionDate)}}</span
-									>
+
+					<div
+						class="d-flex justify-content-center gap-5 align-items-center h-100 flex-wrap"
+					>
+						<div class="d-flex flex-wrap" v-for="card in cards">
+							<div class="card creditCard" v-if="card.color == 'GOLD'">
+								<div class="card__front card__gold">
+									<img
+										class="card__front-square card__square"
+										src="./images/holographicsquare.png"
+									/>
+									<img
+										class="card__front-logo card__logo"
+										src="./images/VISA-logo.png"
+									/>
+									<p class="card_numer">{{card.number}}</p>
+									<div class="card__space-75">
+										<span class="card__label">Card: {{card.type}}</span>
+										<p class="card__info">{{card.cardHolder}}</p>
+									</div>
+									<div class="card__space-25">
+										<span class="card__label">Expires</span>
+										<p class="card__info">
+											{{card.thruDate.slice(2,7).replace("-","/")}}
+										</p>
+									</div>
 								</div>
-								<div class="project-box-content-header">
-									<p class="box-content-header" style="font-size: 20px">
-										Description: {{transaction.transactionDescription}}
-									</p>
-									<p class="box-content-subheader fw-bold" style="font-size: 24px">
-										Amount: {{formatCurrency(transaction.transactionAmount)}}
-									</p>
-									<p
-										class="box-content-subheader fw-bold text-success"
-										style="font-size: 20px"
-									>
-										{{transaction.transactionType}}
-									</p>
+								<div class="card__back card__gold">
+									<div class="card__black-line"></div>
+									<div class="card__back-content">
+										<div class="card__secret">
+											<p class="card__secret--last">{{card.cvv}}</p>
+										</div>
+										<img
+											class="card__back-square card__square"
+											src="./images/holographicsquare.png"
+										/>
+
+										<img
+											class="card__back-logo card__logo"
+											src="./images/VISA-logo.png"
+										/>
+									</div>
 								</div>
 							</div>
-							<div
-								class="project-box"
-								style="background: #ffd3e2"
-								v-if="transaction.transactionType == 'DEBIT'"
-							>
-								<div class="project-box-header">
-									<span>
-										{{formatDate(transaction.transactionDate)}}
-										{{formatTime(transaction.transactionDate)}}
-									</span>
-								</div>
-								<div class="project-box-content-header">
-									<p class="box-content-header" style="font-size: 20px">
-										Description: {{transaction.transactionDescription}}
-									</p>
-									<p class="box-content-subheader fw-bold" style="font-size: 24px">
-										Amount: {{formatCurrency(transaction.transactionAmount)}}
-									</p>
-									<span>
-										<p
-											class="box-content-subheader fw-bold text-danger"
-											style="font-size: 20px"
-										>
-											{{transaction.transactionType}}
+							<div class="card creditCard" v-if="card.color == 'SILVER'">
+								<div class="card__front card__silver">
+									<img
+										class="card__front-square card__square"
+										src="./images/holographicsquare.png"
+									/>
+									<img
+										class="card__front-logo card__logo"
+										src="./images/VISA-logo.png"
+									/>
+									<p class="card_numer">{{card.number}}</p>
+									<div class="card__space-75">
+										<span class="card__label">Card: {{card.type}}</span>
+										<p class="card__info">{{card.cardHolder}}</p>
+									</div>
+									<div class="card__space-25">
+										<span class="card__label">Expires</span>
+										<p class="card__info">
+											{{card.thruDate.slice(2,7).replace("-","/")}}
 										</p>
-									</span>
+									</div>
+								</div>
+								<div class="card__back card__silver">
+									<div class="card__black-line"></div>
+									<div class="card__back-content">
+										<div class="card__secret">
+											<p class="card__secret--last">{{card.cvv}}</p>
+										</div>
+										<img
+											class="card__back-square card__square"
+											src="./images/holographicsquare.png"
+										/>
+
+										<img
+											class="card__back-logo card__logo"
+											src="./images/VISA-logo.png"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="card creditCard" v-if="card.color == 'TITANIUM'">
+								<div class="card__front card__titanium">
+									<img
+										class="card__front-square card__square"
+										src="./images/holographicsquare.png"
+									/>
+									<img
+										class="card__front-logo card__logo"
+										src="./images/VISA-logo.png"
+									/>
+									<p class="card_numer">{{card.number}}</p>
+									<div class="card__space-75">
+										<span class="card__label">Card: {{card.type}}</span>
+										<p class="card__info">{{card.cardHolder}}</p>
+									</div>
+									<div class="card__space-25">
+										<span class="card__label">Expires</span>
+										<p class="card__info">
+											{{card.thruDate.slice(2,7).replace("-","/")}}
+										</p>
+									</div>
+								</div>
+								<div class="card__back card__titanium">
+									<div class="card__black-line"></div>
+									<div class="card__back-content">
+										<div class="card__secret">
+											<p class="card__secret--last">{{card.cvv}}</p>
+										</div>
+										<img
+											class="card__back-square card__square"
+											src="./images/holographicsquare.png"
+										/>
+
+										<img
+											class="card__back-logo card__logo"
+											src="./images/VISA-logo.png"
+										/>
+									</div>
 								</div>
 							</div>
 						</div>
-
-						<div v-if="transactions.length == 0">
-							<h1 class="tittle text-center mt-5">No transactions on this account</h1>
+					</div>
+					<div class="project-boxes">
+						<div v-if="cards.length == 0">
+							<h1 class="tittle text-center mt-5">
+								There are no cards on this client
+							</h1>
+						</div>
+					</div>
+					<div
+						id="carouselExampleFade"
+						class="carousel slide carousel-fade w-100 mt-5"
+						data-bs-ride="carousel"
+					>
+						<div class="carousel-inner w-100">
+							<div
+								class="carousel-item active d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel1.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel2.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel3.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel4.png" class="d-block" alt="..." />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -283,6 +360,6 @@
 		<script src="sweetalert2.all.min.js"></script>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script src="./javascript/account.js"></script>
+		<script src="./javascript/cards.js"></script>
 	</body>
 </html>

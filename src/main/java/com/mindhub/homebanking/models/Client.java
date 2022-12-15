@@ -16,7 +16,6 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO , generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "id_client")
     private Long id;
 
     private String firstName;
@@ -30,7 +29,8 @@ public class Client {
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
-
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    private Set<Card> cards = new HashSet<>();
     public Client() {
     }
     public Client( String firstName, String lastName, String email) {
@@ -84,6 +84,14 @@ public class Client {
     public void addClientLoan(ClientLoan clientLoan) {
         clientLoan.setClient(this);
         clientLoans.add(clientLoan);
+    }
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void addCard(Card card) {
+        card.setClient(this);
+        cards.add(card);
     }
 
 /*

@@ -26,7 +26,8 @@ public class HomebankingApplication {
 									  AccountRepository accountRepository,
 									  TransactionRepository transactionRepository,
 									  LoanRepository loanRepository,
-									  ClientLoanRepository clientLoanRepository) {
+									  ClientLoanRepository clientLoanRepository,
+									  CardRepository cardRepository) {
 		return (args) -> {
 			Client melba = new Client("Melba", "Morel", "melba@mindhub.com");
 			clientRepository.save(melba);
@@ -79,13 +80,10 @@ public class HomebankingApplication {
 			martin.addClientLoan(personalMartin);
 			martin.addClientLoan(carLoanMartin);
 
-
 			Personal.addClientLoan(personalMelba);
 			Mortgage.addClientLoan(mortgageMelba);
 			Personal.addClientLoan(personalMartin);
 			carLoan.addClientLoan(carLoanMartin);
-
-
 
 			loanRepository.save(Mortgage);
 			loanRepository.save(Personal);
@@ -95,6 +93,25 @@ public class HomebankingApplication {
 			clientLoanRepository.save(personalMelba);
 			clientLoanRepository.save(personalMartin);
 			clientLoanRepository.save(carLoanMartin);
+
+			Card goldDebitCardMelba = new Card("Melba Morel", CardType.DEBIT,CardColor.GOLD,"4254 3219 3240 8359", 399, LocalDate.now(), LocalDate.now().minusDays(25));
+			Card titaniumDebitCardMelba= new Card("Melba Morel", CardType.CREDIT,CardColor.TITANIUM,"2576 0378 1257 6487", 274, LocalDate.now(), LocalDate.now().minusDays(25));
+			Card silverCreditCardMartin = new Card("Martin Araolaza",CardType.CREDIT,CardColor.SILVER,"8763 2673 1823 2434",421, LocalDate.now(),LocalDate.now().minusDays(12).minusYears(3));
+
+
+			melba.addCard(goldDebitCardMelba);
+			melba.addCard(titaniumDebitCardMelba);
+			martin.addCard(silverCreditCardMartin);
+
+
+			cardRepository.save(goldDebitCardMelba);
+			cardRepository.save(titaniumDebitCardMelba);
+			cardRepository.save(silverCreditCardMartin);
+
+
+
+
+
 		};
 	}
 

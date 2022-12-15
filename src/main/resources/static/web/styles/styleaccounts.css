@@ -90,6 +90,14 @@ body {
 	flex-direction: column;
 	-webkit-flex-direction: column;
 }
+
+.carousel-item img {
+	margin: 0 !important;
+	border-radius: 25px;
+	height: 424px;
+	margin-bottom: 25px;
+}
+
 .title {
 	margin-bottom: 30px;
 	color: #162969;
@@ -115,7 +123,7 @@ body {
 	perspective: 600px;
 }
 
-.card__part {
+.card__gold {
 	box-shadow: 1px 1px #aaa3a3;
 	top: 0;
 	position: absolute;
@@ -125,7 +133,67 @@ body {
 	width: 320px;
 	height: 190px;
 	background-image: url("../images/world.png"),
-		linear-gradient(to right bottom, #fd696b, #fa616e, #f65871, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+		linear-gradient(to right bottom, #d4af37, #d4af37, #d4af37, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 8px;
+
+	-webkit-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-moz-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-ms-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-o-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+}
+
+.card__silver {
+	box-shadow: 1px 1px #aaa3a3;
+	top: 0;
+	position: absolute;
+	z-index: 1000;
+	left: 0;
+	display: inline-block;
+	width: 320px;
+	height: 190px;
+	background-image: url("../images/world.png"),
+		linear-gradient(to right bottom, #c0c0c0, #c0c0c0, #c0c0c0, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 8px;
+
+	-webkit-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-moz-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-ms-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-o-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+}
+.card__titanium {
+	box-shadow: 1px 1px #aaa3a3;
+	top: 0;
+	position: absolute;
+	z-index: 1000;
+	left: 0;
+	display: inline-block;
+	width: 320px;
+	height: 190px;
+	background-image: url("../images/world.png"),
+		linear-gradient(
+			to right bottom,
+			rgb(57, 87, 117),
+			rgb(57, 87, 117),
+			rgb(57, 87, 117),
+			#f15075,
+			#ec4879
+		); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -743,6 +811,10 @@ body {
 @media screen and (max-width: 980px) {
 	.project-boxes.jsGridView .project-box-wrapper {
 		width: 50%;
+	}
+	.carousel-item img {
+		object-fit: cover;
+		width: 100%;
 	}
 }
 
