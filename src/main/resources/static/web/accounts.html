@@ -188,148 +188,181 @@
 					</div>
 				</div>
 				<div class="projects-section">
-					<div class="projects-section">
-						<div
-							id="carouselExampleFade"
-							class="carousel slide carousel-fade w-100"
-							data-bs-ride="carousel"
-						>
-							<div class="carousel-inner w-100">
-								<div
-									class="carousel-item active d-flex justify-content-center"
-									data-bs-interval="3000"
-								>
-									<img src="./images/adCarousel1.png" class="d-block" alt="..." />
-								</div>
-								<div
-									class="carousel-item d-flex justify-content-center"
-									data-bs-interval="3000"
-								>
-									<img src="./images/adCarousel2.png" class="d-block" alt="..." />
-								</div>
-								<div
-									class="carousel-item d-flex justify-content-center"
-									data-bs-interval="3000"
-								>
-									<img src="./images/adCarousel3.png" class="d-block" alt="..." />
-								</div>
-								<div
-									class="carousel-item d-flex justify-content-center"
-									data-bs-interval="3000"
-								>
-									<img src="./images/adCarousel4.png" class="d-block" alt="..." />
-								</div>
+					<div
+						id="carouselExampleFade"
+						class="carousel slide carousel-fade w-100"
+						data-bs-ride="carousel"
+					>
+						<div class="carousel-inner w-100">
+							<div
+								class="carousel-item active d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel1.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel2.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel3.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel4.png" class="d-block" alt="..." />
 							</div>
 						</div>
+					</div>
 
-						<div class="projects-section-header d-flex justify-content-between">
-							<p>Accounts</p>
-							<p class="time">{{Localtime}}</p>
-						</div>
+					<div class="projects-section-header d-flex justify-content-between">
+						<p>Accounts</p>
+						<p class="time">{{Localtime}}</p>
+					</div>
 
-						<div class="d-flex flex-column gap-3">
-							<div class="project-boxes jsGridView d-flex justify-content-center">
-								<div class="project-box-wrapper" v-for="(account,index) in accounts">
-									<div
-										class="project-box animate__animated animate__flipInX"
-										:key="index"
-										:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
-									>
-										<div class="project-box-header">
-											<span
-												>{{formatDate(account.accountCreationDate)}}
-												{{formatTime(account.accountCreationDate)}}</span
-											>
-										</div>
-										<div class="project-box-content-header">
-											<p class="box-content-header">{{account.accountNumber}}</p>
-											<p class="box-content-subheader fw-bold" style="font-size: 24px">
-												Balance {{formatCurrency(account.accountBalance)}}
-											</p>
-										</div>
-										<div class="d-flex justify-content-center">
-											<a
-												:href="'./account.html?id='+account.accountId"
-												type="button"
-												class="btn btn-dark"
-												>Transactions</a
-											>
-										</div>
-									</div>
-								</div>
-
-								<div v-if="accounts.length == 0">
-									<h1 class="tittle">No accounts on this client</h1>
-								</div>
-							</div>
-							<div class="align-self-center" v-if="accounts.length < 3">
-								<div
-									class="project-box d-flex justify-content-center align-items-center"
-									:key="index"
-									:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
-								>
-									<a
-										href=""
-										class="d-flex flex-column align-items-center"
-										style="text-decoration: none; color: black"
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="32"
-											height="32"
-											fill="black"
-											class="bi bi-patch-plus"
-											viewBox="0 0 16 16"
-										>
-											<path
-												fill-rule="evenodd"
-												d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"
-											/>
-											<path
-												d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"
-											/>
-										</svg>
-										<p>Add a new account</p>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="d-flex mt-5">
-							<div class="projects-section-header">
-								<div>
-									<p>Loans</p>
-								</div>
-							</div>
-						</div>
-						<div
-							class="project-boxes jsGridView d-flex justify-content-center paddingLoan"
-						>
-							<div class="project-box-wrapper" v-for="(loan,index) in loans">
+					<div class="d-flex flex-column gap-3">
+						<div class="project-boxes jsGridView d-flex justify-content-center">
+							<div class="project-box-wrapper" v-for="(account,index) in accounts">
 								<div
 									class="project-box animate__animated animate__flipInX"
 									:key="index"
 									:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
 								>
 									<div class="project-box-header">
-										<span>{{formatDate(loan.date)}} {{formatTime(loan.date)}}</span>
+										<span
+											>{{formatDate(account.accountCreationDate)}}
+											{{formatTime(account.accountCreationDate)}}</span
+										>
 									</div>
 									<div class="project-box-content-header">
-										<p class="box-content-header">{{loan.name}}</p>
+										<p class="box-content-header">{{account.accountNumber}}</p>
 										<p class="box-content-subheader fw-bold" style="font-size: 24px">
-											Amount {{formatCurrency(loan.amount)}}
+											Balance {{formatCurrency(account.accountBalance)}}
 										</p>
 									</div>
 									<div class="d-flex justify-content-center">
-										<p class="box-content-header">Payment: {{loan.payment}}</p>
+										<a
+											:href="'./account.html?id='+account.accountId"
+											type="button"
+											class="btn btn-dark"
+											>Transactions</a
+										>
 									</div>
 								</div>
 							</div>
-							<div v-if="loans.length == 0">
+
+							<div v-if="accounts.length == 0">
 								<h1 class="tittle">No accounts on this client</h1>
 							</div>
 						</div>
+						<div class="align-self-center" v-if="accounts.length < 3">
+							<div
+								class="project-box d-flex justify-content-center align-items-center"
+								:key="index"
+								:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
+							>
+								<a
+									href=""
+									class="d-flex flex-column align-items-center"
+									style="text-decoration: none; color: black"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										fill="black"
+										class="bi bi-patch-plus"
+										viewBox="0 0 16 16"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"
+										/>
+										<path
+											d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"
+										/>
+									</svg>
+									<p>Add a new account</p>
+								</a>
+							</div>
+						</div>
 					</div>
+
+					<div class="d-flex mt-5">
+						<div class="projects-section-header">
+							<div>
+								<p>Loans</p>
+							</div>
+						</div>
+					</div>
+					<div
+						class="project-boxes jsGridView d-flex justify-content-center paddingLoan"
+					>
+						<div class="project-box-wrapper" v-for="(loan,index) in loans">
+							<div
+								class="project-box animate__animated animate__flipInX"
+								:key="index"
+								:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
+							>
+								<div class="project-box-header">
+									<span>{{formatDate(loan.date)}} {{formatTime(loan.date)}}</span>
+								</div>
+								<div class="project-box-content-header">
+									<p class="box-content-header">{{loan.name}}</p>
+									<p class="box-content-subheader fw-bold" style="font-size: 24px">
+										Amount {{formatCurrency(loan.amount)}}
+									</p>
+								</div>
+								<div class="d-flex justify-content-center">
+									<p class="box-content-header">Payment: {{loan.payment}}</p>
+								</div>
+							</div>
+						</div>
+						<div v-if="loans.length == 0">
+							<h1 class="tittle">No accounts on this client</h1>
+						</div>
+					</div>
+
+					<footer class="mb-3">
+						<div class="rounded-social-buttons">
+							<a
+								class="social-button facebook"
+								href="https://www.facebook.com/"
+								target="_blank"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a
+								class="social-button twitter"
+								href="https://www.twitter.com/"
+								target="_blank"
+								><i class="fab fa-twitter"></i
+							></a>
+							<a
+								class="social-button linkedin"
+								href="https://www.linkedin.com/in/dante-vilches-85646423b/"
+								target="_blank"
+								><i class="fab fa-linkedin"></i
+							></a>
+							<a
+								class="social-button youtube"
+								href="https://www.youtube.com/"
+								target="_blank"
+								><i class="fab fa-youtube"></i
+							></a>
+							<a
+								class="social-button instagram"
+								href="https://www.instagram.com/dantepilsen"
+								target="_blank"
+								><i class="fab fa-instagram"></i
+							></a>
+						</div>
+					</footer>
 				</div>
 			</div>
 		</div>
@@ -344,5 +377,11 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="./javascript/accounts.js"></script>
+		<script
+			defer
+			src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
+			integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+			crossorigin="anonymous"
+		></script>
 	</body>
 </html>

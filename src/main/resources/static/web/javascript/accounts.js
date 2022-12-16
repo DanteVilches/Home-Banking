@@ -13,7 +13,11 @@ Vue.createApp({
 	},
 	created() {
 		this.loadData();
-
+		if (localStorage.getItem("dark-mode") === "true") {
+			this.logo = "./images/bank logo.png";
+		} else {
+			this.logo = "./images/bank logo black.png";
+		}
 		document.addEventListener("DOMContentLoaded", function () {
 			let modeSwitch = document.querySelector(".mode-switch");
 

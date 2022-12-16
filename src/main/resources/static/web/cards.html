@@ -192,11 +192,8 @@
 						class="d-flex justify-content-center gap-5 align-items-center h-100 flex-wrap"
 					>
 						<div class="d-flex flex-wrap" v-for="card in cards">
-							<div
-								class="card creditCard animate__animated animate__slideInDown"
-								v-if="card.color == 'GOLD'"
-							>
-								<div class="card__front card__gold">
+							<div class="card creditCard animate__animated animate__slideInDown">
+								<div :class="'card__front card__parts ' +card.type+card.color">
 									<img
 										class="card__front-square card__square"
 										src="./images/holographicsquare.png"
@@ -205,105 +202,19 @@
 										class="card__front-logo card__logo"
 										src="./images/VISA-logo.png"
 									/>
-									<p class="card_numer">{{card.number}}</p>
+									<p class="card_numer textShadow">{{card.number}}</p>
 									<div class="card__space-75">
-										<span class="card__label"> {{card.type}}</span>
-										<p class="card__info">{{card.cardHolder}}</p>
+										<span class="card__label textShadow"> {{card.type}}</span>
+										<p class="card__info textShadow">{{card.cardHolder}}</p>
 									</div>
 									<div class="card__space-25">
-										<span class="card__label">Expires</span>
-										<p class="card__info">
+										<span class="card__label textShadow">Expires</span>
+										<p class="card__info textShadow">
 											{{card.thruDate.slice(2,7).replace("-","/")}}
 										</p>
 									</div>
 								</div>
-								<div class="card__back card__gold">
-									<div class="card__black-line"></div>
-									<div class="card__back-content">
-										<div class="card__secret">
-											<p class="card__secret--last">{{card.cvv}}</p>
-										</div>
-										<img
-											class="card__back-square card__square"
-											src="./images/holographicsquare.png"
-										/>
-
-										<img
-											class="card__back-logo card__logo"
-											src="./images/VISA-logo.png"
-										/>
-									</div>
-								</div>
-							</div>
-							<div
-								class="card creditCard animate__animated animate__slideInDown"
-								v-if="card.color == 'SILVER'"
-							>
-								<div class="card__front card__silver">
-									<img
-										class="card__front-square card__square"
-										src="./images/holographicsquare.png"
-									/>
-									<img
-										class="card__front-logo card__logo"
-										src="./images/VISA-logo.png"
-									/>
-									<p class="card_numer">{{card.number}}</p>
-									<div class="card__space-75">
-										<span class="card__label"> {{card.type}}</span>
-										<p class="card__info">{{card.cardHolder}}</p>
-									</div>
-									<div class="card__space-25">
-										<span class="card__label">Expires</span>
-										<p class="card__info">
-											{{card.thruDate.slice(2,7).replace("-","/")}}
-										</p>
-									</div>
-								</div>
-								<div class="card__back card__silver">
-									<div class="card__black-line"></div>
-									<div class="card__back-content">
-										<div class="card__secret">
-											<p class="card__secret--last">{{card.cvv}}</p>
-										</div>
-										<img
-											class="card__back-square card__square"
-											src="./images/holographicsquare.png"
-										/>
-
-										<img
-											class="card__back-logo card__logo"
-											src="./images/VISA-logo.png"
-										/>
-									</div>
-								</div>
-							</div>
-							<div
-								class="card creditCard animate__animated animate__slideInDown"
-								v-if="card.color == 'TITANIUM'"
-							>
-								<div class="card__front card__titanium">
-									<img
-										class="card__front-square card__square"
-										src="./images/holographicsquare.png"
-									/>
-									<img
-										class="card__front-logo card__logo"
-										src="./images/VISA-logo.png"
-									/>
-									<p class="card_numer">{{card.number}}</p>
-									<div class="card__space-75">
-										<span class="card__label"> {{card.type}}</span>
-										<p class="card__info">{{card.cardHolder}}</p>
-									</div>
-									<div class="card__space-25">
-										<span class="card__label">Expires</span>
-										<p class="card__info">
-											{{card.thruDate.slice(2,7).replace("-","/")}}
-										</p>
-									</div>
-								</div>
-								<div class="card__back card__titanium">
+								<div :class="'card__back  card__parts ' +card.type+card.color">
 									<div class="card__black-line"></div>
 									<div class="card__back-content">
 										<div class="card__secret">
@@ -362,6 +273,41 @@
 							</div>
 						</div>
 					</div>
+
+					<footer class="mt-3 mb-3">
+						<div class="rounded-social-buttons">
+							<a
+								class="social-button facebook"
+								href="https://www.facebook.com/"
+								target="_blank"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a
+								class="social-button twitter"
+								href="https://www.twitter.com/"
+								target="_blank"
+								><i class="fab fa-twitter"></i
+							></a>
+							<a
+								class="social-button linkedin"
+								href="https://www.linkedin.com/in/dante-vilches-85646423b/"
+								target="_blank"
+								><i class="fab fa-linkedin"></i
+							></a>
+							<a
+								class="social-button youtube"
+								href="https://www.youtube.com/"
+								target="_blank"
+								><i class="fab fa-youtube"></i
+							></a>
+							<a
+								class="social-button instagram"
+								href="https://www.instagram.com/dantepilsen"
+								target="_blank"
+								><i class="fab fa-instagram"></i
+							></a>
+						</div>
+					</footer>
 				</div>
 			</div>
 		</div>
@@ -374,5 +320,11 @@
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="./javascript/cards.js"></script>
+		<script
+			defer
+			src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
+			integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+			crossorigin="anonymous"
+		></script>
 	</body>
 </html>

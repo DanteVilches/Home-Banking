@@ -22,7 +22,11 @@ const app = createApp({
 		this.id = params.get("id");
 		this.loadData();
 		this.loadAllAccounts();
-
+		if (localStorage.getItem("dark-mode") === "true") {
+			this.logo = "./images/bank logo.png";
+		} else {
+			this.logo = "./images/bank logo black.png";
+		}
 		document.addEventListener("DOMContentLoaded", function () {
 			let modeSwitch = document.querySelector(".mode-switch");
 
@@ -42,6 +46,7 @@ const app = createApp({
 				document.documentElement.classList.add("dark");
 				modeSwitch.classList.add("active");
 			} else {
+				console.log("hola");
 				this.logo = "./images/bank logo black.png";
 				document.documentElement.classList.remove("dark");
 				modeSwitch.classList.remove("active");
