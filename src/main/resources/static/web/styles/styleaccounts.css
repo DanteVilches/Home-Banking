@@ -133,7 +133,7 @@ body {
 	width: 320px;
 	height: 190px;
 	background-image: url("../images/world.png"),
-		linear-gradient(to right bottom, #d4af37, #d4af37, #d4af37, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+		linear-gradient(to right bottom, #f5d15b, #ffdd6e, #f5d773, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -160,7 +160,7 @@ body {
 	width: 320px;
 	height: 190px;
 	background-image: url("../images/world.png"),
-		linear-gradient(to right bottom, #c0c0c0, #c0c0c0, #c0c0c0, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+		linear-gradient(to right bottom, #c0c0bf, #c0c0bf, #c0c0bf, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -186,14 +186,7 @@ body {
 	width: 320px;
 	height: 190px;
 	background-image: url("../images/world.png"),
-		linear-gradient(
-			to right bottom,
-			rgb(57, 87, 117),
-			rgb(57, 87, 117),
-			rgb(57, 87, 117),
-			#f15075,
-			#ec4879
-		); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+		linear-gradient(to right bottom, #878681, #878681, #878681, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
