@@ -13,7 +13,6 @@ public class LoanDTO {
     private Double maxAmount;
     private List<Integer> payments;
 
-
     private Set<ClientLoanDTO> clientLoanDTO;
 
     public LoanDTO() {

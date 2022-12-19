@@ -19,9 +19,9 @@ public class Loan {
     private String name;
 
     private Double maxAmount;
+
     @OneToMany(mappedBy="loan", fetch=FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
-
 
     @ElementCollection
     private List<Integer> payments = new ArrayList<>();
@@ -71,7 +71,5 @@ public class Loan {
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);
     }
-//    public List<Client> getClients() {
-//        return clientLoans.stream().map(client -> client.getClient()).collect(Collectors.toList());
-//    }
+
 }
