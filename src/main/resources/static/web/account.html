@@ -19,10 +19,10 @@
 			<div class="app-header">
 				<div class="app-header-left">
 					<img :src="logo" alt="" style="width: 64px" />
-					<p class="app-name">Mindhub Brothers</p>
+					<p class="app-name fs-2">Mindhub Brothers</p>
 				</div>
 				<div class="app-header-mid">
-					<p class="tittle">Transactions</p>
+					<p class="tittle fs-2">Transactions</p>
 				</div>
 				<div class="app-header-right">
 					<button class="mode-switch" title="Switch Theme" @click="changeLogoColor">
@@ -127,7 +127,7 @@
 
 						<div class="d-flex flex-column sideBarLogOut">
 							<div class="sidebarLinks">
-								<a href="" class="app-sidebar-link">
+								<a href="" class="app-sidebar-link" @click.prevent="logOut">
 									<div class="ms-2">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"

@@ -69,7 +69,7 @@ const app = createApp({
 				.catch((error) => console.log(error));
 		},
 		loadAllAccounts() {
-			axios.get("http://localhost:8080/api/clients/1").then((json) => {
+			axios.get("http://localhost:8080/api/clients/current").then((json) => {
 				this.accounts = json.data.accountDTO.sort(
 					(a, b) => a.accountId - b.accountId
 				);
@@ -100,6 +100,14 @@ const app = createApp({
 			} else {
 				this.logo = "./images/bank logo.png";
 			}
+		},
+		logOut() {
+			axios
+				.post("/api/logout")
+				.then(
+					(response) => (window.location.href = "./index.html"),
+					console.log("signed out!!!")
+				);
 		},
 	},
 

@@ -25,10 +25,10 @@
 			<div class="app-header d-flex justify-content-between">
 				<div class="app-header-left">
 					<img :src="logo" alt="" style="width: 64px" />
-					<p class="app-name">Mindhub Brothers</p>
+					<p class="app-name fs-2">Mindhub Brothers</p>
 				</div>
 				<div class="app-header-mid">
-					<p class="tittle">Accounts</p>
+					<p class="tittle fs-2">Accounts</p>
 				</div>
 
 				<div class="app-header-right">
@@ -82,7 +82,7 @@
 							<a href="" class="sidebarLinkActive"></a>
 						</div>
 						<div class="sidebarLinks w-100">
-							<a href="./cards.html?id=1" class="app-sidebar-link">
+							<a href="./cards.html" class="app-sidebar-link">
 								<div class="ms-2">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@
 
 						<div class="d-flex flex-column sideBarLogOut">
 							<div class="sidebarLinks">
-								<a href="" class="app-sidebar-link">
+								<a href="" class="app-sidebar-link" @click.prevent="logOut">
 									<div class="ms-2">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -350,6 +350,7 @@
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 		<script src="./javascript/accounts.js"></script>
 		<script
 			defer

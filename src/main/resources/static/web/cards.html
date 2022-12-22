@@ -23,10 +23,10 @@
 			<div class="app-header">
 				<div class="app-header-left">
 					<img :src="logo" alt="" style="width: 64px" />
-					<p class="app-name">Mindhub Brothers</p>
+					<p class="app-name fs-2">Mindhub Brothers</p>
 				</div>
 				<div class="app-header-mid">
-					<p class="tittle">Cards</p>
+					<p class="tittle fs-2">Cards</p>
 				</div>
 				<div class="app-header-right">
 					<button class="mode-switch" title="Switch Theme" @click="changeLogoColor">
@@ -131,7 +131,7 @@
 
 						<div class="d-flex flex-column sideBarLogOut">
 							<div class="sidebarLinks">
-								<a href="" class="app-sidebar-link">
+								<a href="" class="app-sidebar-link" @click.prevent="logOut">
 									<div class="ms-2">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -290,6 +290,7 @@
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"
 		></script>
+
 		<script src="sweetalert2.all.min.js"></script>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

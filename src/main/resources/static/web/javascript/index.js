@@ -1,18 +1,28 @@
-Vue.createApp({
+const { createApp } = Vue;
+
+const app = createApp({
 	data() {
 		return {
-			Localtime: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
-			url: "http://localhost:8080/api/clients/current",
-			client: {},
-			clientName: "",
 			accounts: [],
-			loans: [],
+			account: [],
+			id: "",
+			user: "",
+			password: "",
+			firstName: "",
+			lastName: "",
+			email: "",
+			passwordSignUp: "",
 			logo: "./images/bank logo.png",
-			arrayOfColours: ["#fee4cb", "#e9e7fd", "#ffd3e2", "#c8f7dc", "#d5deff"],
+			Localtime: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
+			type: "",
 		};
 	},
+
 	created() {
-		this.loadData();
+		let queryString = location.search;
+		let params = new URLSearchParams(queryString);
+		this.id = params.get("id");
+
 		if (localStorage.getItem("dark-mode") === "true") {
 			this.logo = "./images/bank logo.png";
 		} else {
@@ -33,42 +43,24 @@ Vue.createApp({
 			});
 
 			if (localStorage.getItem("dark-mode") === "true") {
+				this.logo = "./images/bank logo.png";
 				document.documentElement.classList.add("dark");
 				modeSwitch.classList.add("active");
-				this.logo = "./images/bank logo.png";
 			} else {
+				console.log("hola");
+				this.logo = "./images/bank logo black.png";
 				document.documentElement.classList.remove("dark");
 				modeSwitch.classList.remove("active");
-				this.logo = "./images/bank logo black.png";
 			}
 		});
 	},
-
 	methods: {
-		loadData() {
-			axios
-				.get(this.url)
-				.then((data) => {
-					this.client = data.data;
-
-					this.accounts = this.client.accountDTO.sort(
-						(a, b) => a.accountId - b.accountId
-					);
-					this.loans = this.client.loans.sort((a, b) => a.id - b.id);
-
-					this.clientName = `${this.client.firstName} ${this.client.lastName}`;
-				})
-				.catch((error) => console.log(error));
-		},
-		shuffle() {
-			return this.arrayOfColours.sort(() => Math.random() - 0.5);
-		},
-		formatDate(accountDate) {
-			const date = new Date(accountDate);
+		formatDate(transactionDate) {
+			const date = new Date(transactionDate);
 			return date.toDateString().slice(3);
 		},
-		formatTime(accountDate) {
-			const date = new Date(accountDate);
+		formatTime(transactionDate) {
+			const date = new Date(transactionDate);
 			let minutes =
 				date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
 			return date.getHours() + ":" + minutes;
@@ -81,13 +73,29 @@ Vue.createApp({
 
 			return USDollar.format(money);
 		},
-
 		changeLogoColor() {
 			if (document.documentElement.classList.contains("dark")) {
 				this.logo = "./images/bank logo black.png";
 			} else {
 				this.logo = "./images/bank logo.png";
 			}
+		},
+		login() {
+			axios
+				.post("/api/login", "email=" + this.user + "&password=" + this.password)
+				.then((response) => {
+					window.location.href = "./accounts.html";
+					console.log("signed in!!!");
+				})
+				.catch((response) => {
+					if (response.response.status == "401") {
+						Swal.fire({
+							icon: "error",
+							title: "Email/Password incorrect",
+							text: "Please correct the login info",
+						});
+					}
+				});
 		},
 		logOut() {
 			axios
@@ -97,7 +105,37 @@ Vue.createApp({
 					console.log("signed out!!!")
 				);
 		},
+		register() {
+			axios
+				.post(
+					"/api/clients",
+					"firstName=" +
+						this.firstName +
+						"&lastName=" +
+						this.lastName +
+						"&email=" +
+						this.email +
+						"&password=" +
+						this.passwordSignUp
+				)
+				.then((response) => {
+					console.log("registered");
+					axios
+						.post(
+							"/api/login",
+							"email=" + this.email + "&password=" + this.passwordSignUp
+						)
+						.then((response) => {
+							window.location.href = "./accounts.html";
+						});
+				});
+		},
 	},
 
 	computed: {},
 }).mount("#app");
+
+const toggleForm = () => {
+	const container = document.querySelector(".container");
+	container.classList.toggle("active");
+};
