@@ -50,7 +50,7 @@ Vue.createApp({
 				.get(this.url)
 				.then((data) => {
 					this.client = data.data;
-
+					console.log(this.client);
 					this.accounts = this.client.accountDTO.sort(
 						(a, b) => a.accountId - b.accountId
 					);
@@ -96,6 +96,22 @@ Vue.createApp({
 					(response) => (window.location.href = "./index.html"),
 					console.log("signed out!!!")
 				);
+		},
+		createAccount() {
+			Swal.fire({
+				title: "Do you want to create a new account?",
+				icon: "info",
+				showCancelButton: true,
+				confirmButtonText: "Create",
+			}).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					axios.post("/api/clients/current/accounts").then((response) => {
+						this.loadData();
+					});
+					Swal.fire("Created!", "", "success");
+				}
+			});
 		},
 	},
 

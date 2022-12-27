@@ -7,6 +7,8 @@ const app = createApp({
 			account: [],
 			cards: [],
 			id: "",
+			radioType: "",
+			radioColor: "",
 			transactions: [],
 			accountName: "",
 			clientName: "",
@@ -24,7 +26,7 @@ const app = createApp({
 		this.id = params.get("id");
 
 		this.loadData();
-		this.loadAllAccounts();
+
 		if (localStorage.getItem("dark-mode") === "true") {
 			this.logo = "./images/bank logo.png";
 		} else {
@@ -55,25 +57,9 @@ const app = createApp({
 	},
 	methods: {
 		loadData() {
-			axios
-				.get("http://localhost:8080/api/accounts/" + this.id)
-				.then((data) => {
-					this.account = data.data;
-					this.accountName = this.account.accountNumber;
-					this.accountBalance = this.account.accountBalance;
-					this.transactions = this.account.transactionDTO.sort(
-						(a, b) => a.transactionID - b.transactionID
-					);
-				})
-
-				.catch((error) => console.log(error));
-		},
-		loadAllAccounts() {
 			axios.get("http://localhost:8080/api/clients/current").then((json) => {
-				this.cards = json.data.cardDTO.sort((a, b) => a.id - b.id);
-				this.accounts = json.data.accountDTO.sort(
-					(a, b) => a.accountId - b.accountId
-				);
+				this.cards = json.data.cardDTO.sort((a, b) => a.type - b.type);
+
 				this.clientName = json.data.firstName + " " + json.data.lastName;
 			});
 		},
@@ -109,6 +95,33 @@ const app = createApp({
 					(response) => (window.location.href = "./index.html"),
 					console.log("signed out!!!")
 				);
+		},
+		createCard() {
+			axios
+				.post(
+					"/api/clients/current/cards",
+					"cardType=" + this.radioType + "&cardColor=" + this.radioColor
+				)
+				.then((response) => {
+					Swal.fire("Created!", "", "success");
+					this.loadData();
+				})
+				.catch((error) => {
+					if (error.response.status == "400") {
+						Swal.fire({
+							icon: "error",
+							title: "Incorrect Card type/color",
+							text: "Please choose one",
+						});
+					}
+					if (error.response.status == "403") {
+						Swal.fire({
+							icon: "error",
+							title: "There's already a card with this type and color",
+							text: "Please choose another",
+						});
+					}
+				});
 		},
 	},
 

@@ -158,10 +158,115 @@
 					</div>
 				</div>
 				<div class="projects-section">
-					<div class="projects-section-header d-flex justify-content-end">
+					<div
+						class="projects-section-header d-flex justify-content-between"
+						v-if="cards.length < 6"
+					>
+						<button
+							type="button"
+							class="btn btn-primary"
+							data-bs-toggle="modal"
+							data-bs-target="#createCardModal"
+						>
+							Add a new Card
+						</button>
 						<p class="time">{{Localtime}}</p>
 					</div>
+					<div
+						class="projects-section-header d-flex justify-content-end"
+						v-if="cards.length > 5"
+					>
+						<p class="time">{{Localtime}}</p>
+					</div>
+					<div class="modal" id="createCardModal">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">
+										Create a new Card
+									</h1>
+								</div>
+								<div class="modal-body">
+									<p>Card Type</p>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardType"
+											id="CREDIT"
+											value="CREDIT"
+											v-model="radioType"
+										/>
+										<label class="form-check-label" for="CREDIT"> Credit</label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardType"
+											id="DEBIT"
+											value="DEBIT"
+											v-model="radioType"
+										/>
+										<label class="form-check-label" for="DEBIT"> Debit </label>
+									</div>
+									<hr />
+									<p>Card Color</p>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardColor"
+											id="SILVER"
+											value="SILVER"
+											v-model="radioColor"
+										/>
+										<label class="form-check-label" for="SILVER"> Silver </label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardColor"
+											id="GOLD"
+											value="GOLD"
+											v-model="radioColor"
+										/>
+										<label class="form-check-label" for="GOLD"> Gold </label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardColor"
+											id="TITANIUM"
+											value="TITANIUM"
+											v-model="radioColor"
+										/>
+										<label class="form-check-label" for="TITANIUM"> Titanium </label>
+									</div>
+								</div>
 
+								<div class="modal-footer">
+									<button
+										type="button"
+										class="btn btn-secondary"
+										data-bs-dismiss="modal"
+									>
+										Close
+									</button>
+									<button
+										type="button"
+										class="btn btn-primary"
+										@click.prevent="createCard"
+										data-bs-dismiss="modal"
+									>
+										Create Card
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div
 						class="d-flex justify-content-center gap-5 align-items-center h-100 flex-wrap"
 					>
@@ -210,7 +315,7 @@
 					</div>
 					<div class="project-boxes">
 						<div v-if="cards.length == 0">
-							<h1 class="tittle text-center mt-5">
+							<h1 class="tittle text-center mt-5 mb-5">
 								There are no cards on this client
 							</h1>
 						</div>

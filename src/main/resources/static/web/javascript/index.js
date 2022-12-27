@@ -84,7 +84,30 @@ const app = createApp({
 			axios
 				.post("/api/login", "email=" + this.user + "&password=" + this.password)
 				.then((response) => {
-					window.location.href = "./accounts.html";
+					const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+
+					Toast.fire({
+						icon: "success",
+						title: "Signed in successfully",
+					});
+					setTimeout(() => {
+						if (this.user == "admin@admin") {
+							window.location.href = "../manager.html";
+						} else {
+							window.location.href = "./accounts.html";
+						}
+					}, 3000);
+
 					console.log("signed in!!!");
 				})
 				.catch((response) => {

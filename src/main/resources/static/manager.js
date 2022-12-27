@@ -23,6 +23,7 @@ createApp({
 					this.backendJson = data.data;
 
 					this.clients = data.data;
+					console.log(this.clients);
 				})
 				.catch((error) => console.log(error));
 		},
@@ -234,6 +235,14 @@ createApp({
 					break;
 				default:
 			}
+		},
+		logOut() {
+			axios
+				.post("/api/logout")
+				.then(
+					(response) => (window.location.href = "./web/index.html"),
+					console.log("signed out!!!")
+				);
 		},
 	},
 	computed: {},

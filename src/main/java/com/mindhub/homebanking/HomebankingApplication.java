@@ -49,7 +49,7 @@ public class HomebankingApplication {
 			clientRepository.save(melba);
 			clientRepository.save(martin);
 			clientRepository.save(lucy);
-
+			clientRepository.save(admin);
 			melba.addAccount(Vin001);
 			melba.addAccount(Vin002);
 			melba.addAccount(Vin003);

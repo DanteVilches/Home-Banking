@@ -21,10 +21,13 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers("/rest/**").denyAll()
                 .antMatchers(HttpMethod.POST,"/api/clients").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET,"/api/clients/current","/api/accounts/{id}").hasAuthority("CLIENT")
                 .antMatchers("/web/images/**","/web/styles/**","/web/javascript/**","/web/index.html").permitAll()
-                .antMatchers("/admin/**","/rest/**").hasAuthority("ADMIN")
-                .antMatchers("/web/**").hasAuthority("CLIENT");
+                .antMatchers("/manager.html","/api/**", "/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers("/web/**","/api/clients/current").hasAuthority("CLIENT");
 
 
         http.formLogin()
@@ -32,7 +35,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .loginPage("/api/login");
 
-        http.logout().logoutUrl("/api/logout");
+        http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
 // turn off checking for CSRF tokens
         http.csrf().disable();
