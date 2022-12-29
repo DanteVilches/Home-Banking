@@ -8,47 +8,47 @@ import java.time.LocalDateTime;
 
 
 public class TransactionDTO {
-    private Long transactionID;
+    private Long id;
 
-    private TransactionType transactionType;
+    private TransactionType type;
 
-    private Double transactionAmount;
+    private Double amount;
 
-    private String transactionDescription;
+    private String description;
 
-    private LocalDateTime transactionDate;
+    private LocalDateTime date;
 
     public TransactionDTO() {
     }
 
     public TransactionDTO(Transaction transaction) {
-        this.transactionID = transaction.getId();
-        this.transactionType = transaction.getType();
-        this.transactionAmount = transaction.getAmount();
-        this.transactionDescription = transaction.getDescription();
-        this.transactionDate = transaction.getDate();
+        this.id = transaction.getId();
+        this.type = transaction.getType();
+        this.amount = transaction.getAmount();
+        this.description = transaction.getDescription();
+        this.date = transaction.getDate();
 
 
     }
 
-    public Long getTransactionID() {
-        return transactionID;
+    public Long getId() {
+        return id;
     }
 
-    public TransactionType getTransactionType() {
-        return transactionType;
+    public TransactionType getType() {
+        return type;
     }
 
-    public Double getTransactionAmount() {
-        return transactionAmount;
+    public Double getAmount() {
+        return amount;
     }
 
-    public String getTransactionDescription() {
-        return transactionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public LocalDateTime getTransactionDate() {
-        return transactionDate;
+    public LocalDateTime getDate() {
+        return date;
     }
 }
 

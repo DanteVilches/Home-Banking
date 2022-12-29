@@ -7,37 +7,37 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AccountDTO {
-    private Long accountId;
-    private String accountNumber;
-    private LocalDateTime accountCreationDate;
-    private Double accountBalance;
+    private Long id;
+    private String number;
+    private LocalDateTime creationDate;
+    private Double balance;
     private Set<TransactionDTO> transactionDTO;
     public AccountDTO() {
     }
 
     public AccountDTO(Account account) {
-        this.accountId = account.getId();
-        this.accountNumber = account.getNumber();
-        this.accountCreationDate = account.getCreationDate();
-        this.accountBalance = account.getBalance();
+        this.id = account.getId();
+        this.number = account.getNumber();
+        this.creationDate = account.getCreationDate();
+        this.balance = account.getBalance();
         this.transactionDTO = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toSet());
 
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public Long getId() {
+        return id;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public LocalDateTime getAccountCreationDate() {
-        return accountCreationDate;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public Double getAccountBalance() {
-        return accountBalance;
+    public Double getBalance() {
+        return balance;
     }
 
     public Set<TransactionDTO> getTransactionDTO() {

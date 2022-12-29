@@ -210,19 +210,19 @@
 								>
 									<div class="project-box-header">
 										<span
-											>{{formatDate(account.accountCreationDate)}}
-											{{formatTime(account.accountCreationDate)}}</span
+											>{{formatDate(account.creationDate)}}
+											{{formatTime(account.creationDate)}}</span
 										>
 									</div>
 									<div class="project-box-content-header">
-										<p class="box-content-header">{{account.accountNumber}}</p>
+										<p class="box-content-header">{{account.number}}</p>
 										<p class="box-content-subheader fw-bold" style="font-size: 24px">
-											Balance {{formatCurrency(account.accountBalance)}}
+											Balance {{formatCurrency(account.balance)}}
 										</p>
 									</div>
 									<div class="d-flex justify-content-center">
 										<a
-											:href="'./account.html?id='+account.accountId"
+											:href="'./account.html?id='+account.id"
 											type="button"
 											class="btn btn-dark"
 											>Transactions</a

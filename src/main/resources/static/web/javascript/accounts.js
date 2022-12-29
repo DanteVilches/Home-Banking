@@ -50,10 +50,8 @@ Vue.createApp({
 				.get(this.url)
 				.then((data) => {
 					this.client = data.data;
-					console.log(this.client);
-					this.accounts = this.client.accountDTO.sort(
-						(a, b) => a.accountId - b.accountId
-					);
+					this.accounts = this.client.accountDTO.sort((a, b) => a.id - b.id);
+					console.log(this.accounts);
 					this.loans = this.client.loans.sort((a, b) => a.id - b.id);
 
 					this.clientName = `${this.client.firstName} ${this.client.lastName}`;

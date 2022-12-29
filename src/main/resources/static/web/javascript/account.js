@@ -20,7 +20,6 @@ const app = createApp({
 		let queryString = location.search;
 		let params = new URLSearchParams(queryString);
 		this.id = params.get("id");
-		this.loadData();
 		this.loadAllAccounts();
 		if (localStorage.getItem("dark-mode") === "true") {
 			this.logo = "./images/bank logo.png";
@@ -46,7 +45,6 @@ const app = createApp({
 				document.documentElement.classList.add("dark");
 				modeSwitch.classList.add("active");
 			} else {
-				console.log("hola");
 				this.logo = "./images/bank logo black.png";
 				document.documentElement.classList.remove("dark");
 				modeSwitch.classList.remove("active");
@@ -56,11 +54,10 @@ const app = createApp({
 	methods: {
 		loadData() {
 			axios
-				.get("http://localhost:8080/api/accounts/" + this.id)
+				.get("http://localhost:8080/api/clients/current/" + this.id)
 				.then((data) => {
-					this.account = data.data;
-					this.accountName = this.account.accountNumber;
-					this.accountBalance = this.account.accountBalance;
+					this.accountName = this.account.number;
+					this.accountBalance = this.account.balance;
 					this.transactions = this.account.transactionDTO.sort(
 						(a, b) => a.transactionID - b.transactionID
 					);
@@ -73,6 +70,15 @@ const app = createApp({
 				this.accounts = json.data.accountDTO.sort(
 					(a, b) => a.accountId - b.accountId
 				);
+
+				this.account = this.accounts.find((account) => account.id == this.id);
+
+				this.accountName = this.account.number;
+				this.accountBalance = this.account.balance;
+				this.transactions = this.account.transactionDTO.sort(
+					(a, b) => a.transactionID - b.transactionID
+				);
+				console.log(this.transactions);
 				this.clientName = json.data.firstName + " " + json.data.lastName;
 			});
 		},
