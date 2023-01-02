@@ -34,12 +34,10 @@ public class TransactionController {
 
 
     @Transactional
-    @PostMapping("/clients/current/transaction")
+    @PostMapping("/clients/current/transactions")
     public ResponseEntity<Object> newTransaction(
             @RequestParam Double amount, @RequestParam String description,
             @RequestParam String originAccount, @RequestParam String destinationAccount, Authentication authentication) {
-
-
 
         Client currentClient = clientRepository.findByEmail(authentication.getName());
         Account originAccountFromRepository = accountRepository.findByNumber(originAccount);
