@@ -45,7 +45,7 @@ public class AccountController {
     @PostMapping("/clients/current/accounts")
     ResponseEntity<Object> createNewAccount(Authentication authentication){
         Client currentClient = clientRepository.findByEmail(authentication.getName());
-        if (currentClient.getAccounts().size() <= 3){
+        if (currentClient.getAccounts().size() < 3){
             Account newAccount = new Account("VIN-"+getRandomNumber(10000000,99999999),LocalDateTime.now(),0D);
             currentClient.addAccount(newAccount);
             accountRepository.save(newAccount);

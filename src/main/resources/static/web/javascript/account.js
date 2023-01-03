@@ -52,33 +52,14 @@ const app = createApp({
 		});
 	},
 	methods: {
-		loadData() {
-			axios
-				.get("http://localhost:8080/api/clients/current/" + this.id)
-				.then((data) => {
-					this.accountName = this.account.number;
-					this.accountBalance = this.account.balance;
-					this.transactions = this.account.transactionDTO.sort(
-						(a, b) => a.transactionID - b.transactionID
-					);
-				})
-
-				.catch((error) => console.log(error));
-		},
 		loadAllAccounts() {
 			axios.get("http://localhost:8080/api/clients/current").then((json) => {
-				this.accounts = json.data.accountDTO.sort(
-					(a, b) => a.accountId - b.accountId
-				);
+				this.accounts = json.data.accountDTO.sort((a, b) => a.id - b.id);
 
 				this.account = this.accounts.find((account) => account.id == this.id);
-
 				this.accountName = this.account.number;
 				this.accountBalance = this.account.balance;
-				this.transactions = this.account.transactionDTO.sort(
-					(a, b) => a.transactionID - b.transactionID
-				);
-				console.log(this.transactions);
+				this.transactions = this.account.transactionDTO.sort((a, b) => b.id - a.id);
 				this.clientName = json.data.firstName + " " + json.data.lastName;
 			});
 		},

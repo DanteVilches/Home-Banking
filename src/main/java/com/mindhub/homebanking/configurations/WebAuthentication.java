@@ -15,9 +15,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-import java.util.Optional;
-
 @Configuration
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
 
@@ -49,8 +46,5 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    @RequestMapping("/api/clients")
-    public Client getCurrent(Authentication authentication){
-      return clientRepository.findByEmail(authentication.getName());
-    }
+
 }

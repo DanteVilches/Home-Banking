@@ -37,11 +37,13 @@ public class CardController {
     ResponseEntity<Object> createNewCard(Authentication authentication, @RequestParam CardType cardType, @RequestParam CardColor cardColor){
         Client currentClient = clientRepository.findByEmail(authentication.getName());
 //String cardHolder, CardType type, CardColor color, String number, int cvv, LocalDate thruDate, LocalDate fromDate
-        if (!currentClient.getCards().stream().filter(card -> card.getType().equals(cardType)).filter(card -> card.getColor().equals(cardColor)).collect(Collectors.toSet()).isEmpty()){
-        return new ResponseEntity<>("There's already a card of this type/color", HttpStatus.FORBIDDEN);
-        }
+
         if (cardType == null || cardColor == null) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        }
+
+        if (!currentClient.getCards().stream().filter(card -> card.getType().equals(cardType)).filter(card -> card.getColor().equals(cardColor)).collect(Collectors.toSet()).isEmpty()){
+        return new ResponseEntity<>("There's already a card of this type/color", HttpStatus.FORBIDDEN);
         }
 
         Card newCard = new Card(currentClient.getFirstName()+" "+currentClient.getLastName(), cardType,cardColor,createRandomCard(),getRandomNumber(100,999),LocalDate.now().plusYears(5), LocalDate.now());

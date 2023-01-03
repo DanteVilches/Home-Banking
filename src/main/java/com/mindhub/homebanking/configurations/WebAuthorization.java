@@ -24,10 +24,10 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/**").denyAll()
                 .antMatchers(HttpMethod.POST,"/api/clients").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards","/api/clients/current/transactions").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.GET,"/api/clients/current","/api/accounts/{id}").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET,"/api/clients/current").hasAuthority("CLIENT")
                 .antMatchers("/web/images/**","/web/styles/**","/web/javascript/**","/web/index.html").permitAll()
                 .antMatchers("/manager.html","/api/**", "/h2-console/**").hasAuthority("ADMIN")
-                .antMatchers("/web/**","/api/clients/current").hasAuthority("CLIENT");
+                .antMatchers("/web/**").hasAuthority("CLIENT");
 
 
         http.formLogin()
@@ -43,7 +43,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 //disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
 
-// if user is not authenticated, just send an authentication failure response
+// if user is not authenticated, just send an authentication failure response  request response exception
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
 // if login is successful, just clear the flags asking for authentication
