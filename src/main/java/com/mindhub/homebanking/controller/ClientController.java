@@ -75,7 +75,7 @@ public class ClientController {
         newClient.addAccount(newAccount);
         accountRepository.save(newAccount);
 
-        return new ResponseEntity<>("The account has been created",HttpStatus.CREATED);
+        return new ResponseEntity<>("The client has been created",HttpStatus.CREATED);
 
 
 

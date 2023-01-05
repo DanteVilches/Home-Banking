@@ -198,8 +198,8 @@
 								data-bs-parent="#accordionPanelsStayOpenExample"
 							>
 								<div class="accordion-body d-flex flex-column">
-									<div class="d-flex justify-content-center">
-										<div class="w-25 me-4">
+									<div class="d-flex justify-content-center flex-wrap">
+										<div class="w-25 me-4 w100Mobile">
 											<select class="form-select" v-model="chosenAccount">
 												<option value="">Origin Account</option>
 												<option :value="account.number" v-for="account in accounts">
@@ -208,7 +208,7 @@
 											</select>
 										</div>
 
-										<div class="input-group mb-3 w-25 me-4">
+										<div class="input-group mb-3 w-25 me-4 w100Mobile">
 											<span class="input-group-text">$</span>
 											<input
 												type="number"
@@ -217,7 +217,7 @@
 												v-model="amountToOthers"
 											/>
 										</div>
-										<div class="input-group mb-3 w-25">
+										<div class="input-group mb-3 w-25 w100Mobile">
 											<input
 												type="text"
 												class="form-control"
@@ -227,7 +227,7 @@
 										</div>
 									</div>
 
-									<div class="input-group w-50 align-self-center">
+									<div class="input-group w-50 align-self-center w100Mobile">
 										<span class="input-group-text">Description</span
 										><textarea
 											class="form-control"
@@ -267,8 +267,8 @@
 								data-bs-parent="#accordionPanelsStayOpenExample"
 							>
 								<div class="accordion-body d-flex flex-column">
-									<div class="input-group mb-3 d-flex justify-content-center">
-										<div class="w-25 me-4">
+									<div class="input-group mb-3 d-flex justify-content-center flex-wrap">
+										<div class="w-25 me-4 w100Mobile">
 											<select class="form-select" v-model="chosenAccountOrigin">
 												<option value="">Origin Account</option>
 												<option
@@ -281,7 +281,7 @@
 											</select>
 										</div>
 
-										<div class="input-group mb-3 w-25 me-4">
+										<div class="input-group mb-3 w-25 me-4 w100Mobile">
 											<span class="input-group-text">$</span>
 											<input
 												type="number"
@@ -291,7 +291,7 @@
 											/>
 										</div>
 
-										<div class="w-25">
+										<div class="w-25 w100Mobile">
 											<select class="form-select" v-model="chosenAccountDestination">
 												<option value="">Destination Account</option>
 												<option
@@ -305,7 +305,7 @@
 										</div>
 									</div>
 
-									<div class="input-group w-50 align-self-center">
+									<div class="input-group w-50 align-self-center w100Mobile">
 										<span class="input-group-text">Description</span
 										><textarea
 											class="form-control"

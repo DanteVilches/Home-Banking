@@ -1055,4 +1055,8 @@ body {
 		right: 2px;
 		top: 10px;
 	}
+	.w100Mobile {
+		width: 100% !important;
+		margin-bottom: 5px !important;
+	}
 }

@@ -55,7 +55,6 @@ const app = createApp({
 		loadAllAccounts() {
 			axios.get("http://localhost:8080/api/clients/current").then((json) => {
 				this.accounts = json.data.accountDTO.sort((a, b) => a.id - b.id);
-
 				this.account = this.accounts.find((account) => account.id == this.id);
 				this.accountName = this.account.number;
 				this.accountBalance = this.account.balance;

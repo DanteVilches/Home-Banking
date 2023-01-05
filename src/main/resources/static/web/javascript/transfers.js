@@ -124,6 +124,13 @@ Vue.createApp({
 								.catch((error) => {
 									console.log("error from post");
 									console.log(error);
+									if (error.response.status == 403) {
+										Swal.fire({
+											icon: "error",
+											title: error.response.data,
+											text: "Please choose a valid amount",
+										});
+									}
 								});
 						}
 					});
@@ -168,6 +175,13 @@ Vue.createApp({
 							.catch((error) => {
 								console.log("error from post");
 								console.log(error);
+								if (error.response.status == 403) {
+									Swal.fire({
+										icon: "error",
+										title: error.response.data,
+										text: "Please choose a valid amount",
+									});
+								}
 							});
 					}
 				});

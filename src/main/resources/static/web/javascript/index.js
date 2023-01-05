@@ -142,15 +142,42 @@ const app = createApp({
 						this.passwordSignUp
 				)
 				.then((response) => {
-					console.log("registered");
-					axios
-						.post(
-							"/api/login",
-							"email=" + this.email + "&password=" + this.passwordSignUp
-						)
-						.then((response) => {
-							window.location.href = "./accounts.html";
+					const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+					Toast.fire({
+						icon: "success",
+						title: "Signed up successfully, Login in...",
+					});
+
+					setTimeout(() => {
+						axios
+							.post(
+								"/api/login",
+								"email=" + this.email + "&password=" + this.passwordSignUp
+							)
+							.then((response) => {
+								window.location.href = "./accounts.html";
+							});
+					}, 3000);
+				})
+				.catch((error) => {
+					console.log(error);
+					if (error.response.status == "403") {
+						Swal.fire({
+							icon: "error",
+							title: error.response.data,
+							text: "Please correct the field",
 						});
+					}
 				});
 		},
 	},

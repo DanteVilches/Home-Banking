@@ -3,6 +3,7 @@ package com.mindhub.homebanking.dtos;
 import com.mindhub.homebanking.models.ClientLoan;
 import com.mindhub.homebanking.models.Loan;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ClientLoanDTO {
@@ -16,7 +17,7 @@ public class ClientLoanDTO {
 
     private Integer payment;
 
-    private Date date;
+    private LocalDate date;
 
     public ClientLoanDTO() {
     }
@@ -50,9 +51,7 @@ public class ClientLoanDTO {
         return payment;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
-
-
 }

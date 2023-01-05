@@ -58,14 +58,14 @@
 								<div class="formBx">
 									<form action="" onsubmit="return false;">
 										<h2>Sign In</h2>
-										<input type="text" name="" placeholder="Username" v-model="user" />
+										<input type="text" placeholder="Username" v-model="user" />
 										<input
 											type="password"
 											name=""
 											placeholder="Password"
 											v-model="password"
 										/>
-										<input type="submit" name="" value="Login" @click.prevent="login" />
+										<input type="submit" value="Login" @click.prevent="login" />
 										<p class="signup">
 											Don't have an account ?
 											<a href="#" onclick="toggleForm();">Sign Up.</a>
@@ -77,36 +77,15 @@
 								<div class="formBx">
 									<form action="" onsubmit="return false;">
 										<h2>Create an account</h2>
-										<input
-											type="text"
-											name=""
-											placeholder="First Name"
-											v-model="firstName"
-										/>
-										<input
-											type="text"
-											name=""
-											placeholder="Last Name"
-											v-model="lastName"
-										/>
-										<input
-											type="email"
-											name=""
-											placeholder="Email Adress"
-											v-model="email"
-										/>
+										<input type="text" placeholder="First Name" v-model="firstName" />
+										<input type="text" placeholder="Last Name" v-model="lastName" />
+										<input type="email" placeholder="Email Adress" v-model="email" />
 										<input
 											type="password"
-											name=""
 											placeholder="Create Password"
 											v-model="passwordSignUp"
 										/>
-										<input
-											type="submit"
-											name=""
-											value="Sign Up"
-											@click.prevent="register"
-										/>
+										<input type="submit" value="Sign Up" @click.prevent="register" />
 										<p class="signup">
 											Already have an account ?
 											<a href="#" onclick="toggleForm();">Sign in.</a>

@@ -36,7 +36,7 @@ public class CardController {
     @PostMapping("/clients/current/cards")
     ResponseEntity<Object> createNewCard(Authentication authentication, @RequestParam CardType cardType, @RequestParam CardColor cardColor){
         Client currentClient = clientRepository.findByEmail(authentication.getName());
-//String cardHolder, CardType type, CardColor color, String number, int cvv, LocalDate thruDate, LocalDate fromDate
+
 
         if (cardType == null || cardColor == null) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);

@@ -85,10 +85,10 @@ public class HomebankingApplication {
 			Loan Personal = new Loan("Personal",100000.00D, personalPayment);
 			Loan carLoan = new Loan("Car Loan",300000.00D, carLoanPayment);
 
-			ClientLoan mortgageMelba = new ClientLoan(400000.20D, mortgagePayment.get(4), new Date());
-			ClientLoan personalMelba = new ClientLoan(50000.10D, personalPayment.get(1), new Date());
-			ClientLoan personalMartin = new ClientLoan(100000.70D,personalPayment.get(2),new Date());
-			ClientLoan carLoanMartin = new ClientLoan(200000.50D,carLoanPayment.get(3),new Date());
+			ClientLoan mortgageMelba = new ClientLoan(400000.20D, mortgagePayment.get(4), LocalDate.now());
+			ClientLoan personalMelba = new ClientLoan(50000.10D, personalPayment.get(1), LocalDate.now());
+			ClientLoan personalMartin = new ClientLoan(100000.70D,personalPayment.get(2),LocalDate.now());
+			ClientLoan carLoanMartin = new ClientLoan(200000.50D,carLoanPayment.get(3),LocalDate.now());
 
 			melba.addClientLoan(mortgageMelba);
 			melba.addClientLoan(personalMelba);
