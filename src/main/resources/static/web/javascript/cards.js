@@ -58,7 +58,7 @@ const app = createApp({
 	methods: {
 		loadData() {
 			axios.get("http://localhost:8080/api/clients/current").then((json) => {
-				this.cards = json.data.cardDTO.sort((a, b) => a.type - b.type);
+				this.cards = json.data.cardDTO.sort((a, b) => a.id - b.id);
 
 				this.clientName = json.data.firstName + " " + json.data.lastName;
 			});

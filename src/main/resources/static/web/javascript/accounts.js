@@ -7,6 +7,7 @@ Vue.createApp({
 			clientName: "",
 			accounts: [],
 			loans: [],
+			index: "",
 			logo: "./images/bank logo.png",
 			arrayOfColours: ["#fee4cb", "#e9e7fd", "#ffd3e2", "#c8f7dc", "#d5deff"],
 		};

@@ -1,7 +1,5 @@
 package com.mindhub.homebanking.controller;
 
-
-import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +45,7 @@ public class LoansController {
 
 
     @Transactional
-    @PostMapping("/clients")
+    @PostMapping("/loans")
     public ResponseEntity<Object> loanApplication(@RequestBody LoanApplicationDTO loan, Authentication authentication) {
 
         Client currentClient = clientRepository.findByEmail(authentication.getName());
@@ -66,7 +63,7 @@ public class LoansController {
             return new ResponseEntity<>("Payments are incorrect", HttpStatus.FORBIDDEN);
         }
         if( currentLoan.getPayments().stream().filter(payment -> payment.equals(loan.getPayments())).collect(Collectors.toSet()).isEmpty() ){
-            return new ResponseEntity<>("Payment can't be found", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("This payment is not available for this loan", HttpStatus.FORBIDDEN);
 
         }
         if(loan.getAmount() < 0 || loan.getAmount() == 0 ){
@@ -80,7 +77,6 @@ public class LoansController {
 
         }
         if(currentClient.getAccounts().stream().filter(account -> account.getNumber().equals(loan.getAccount())).collect(Collectors.toSet()).isEmpty()){
-
             return new ResponseEntity<>("You're not the owner of this account", HttpStatus.FORBIDDEN);
         }
         ClientLoan newClientLoan = new ClientLoan(loan.getAmount()*1.20,loan.getPayments(), LocalDate.now());
