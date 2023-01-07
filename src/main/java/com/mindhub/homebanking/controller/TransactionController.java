@@ -4,9 +4,9 @@ import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.service.AccountService;
+import com.mindhub.homebanking.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +24,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class TransactionController {
 
+
+
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
+
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -39,9 +42,9 @@ public class TransactionController {
             @RequestParam Double amount, @RequestParam String description,
             @RequestParam String originAccount, @RequestParam String destinationAccount, Authentication authentication) {
 
-        Client currentClient = clientRepository.findByEmail(authentication.getName());
-        Account originAccountFromRepository = accountRepository.findByNumber(originAccount);
-        Account destinationAccountFromRepository = accountRepository.findByNumber(destinationAccount);
+        Client currentClient = clientService.getClientByEmail(authentication.getName());
+        Account originAccountFromRepository = accountService.getAccountByNumber(originAccount);
+        Account destinationAccountFromRepository = accountService.getAccountByNumber(destinationAccount);
 
         if (amount.isNaN() || amount == 0 || amount.isInfinite()){
             return new ResponseEntity<>("The amount is incorrect", HttpStatus.FORBIDDEN);
@@ -60,18 +63,18 @@ public class TransactionController {
             return new ResponseEntity<>("The destination account is the same as the origin account", HttpStatus.FORBIDDEN);
         }
 
-        if (accountRepository.findByNumber(originAccount) == null){
+        if (accountService.getAccountByNumber(originAccount) == null){
             return new ResponseEntity<>("The origin account does not exist", HttpStatus.FORBIDDEN);
         }
 
         if (currentClient.getAccounts().stream().filter(account -> account.getNumber().equals(originAccount)).collect(Collectors.toSet()).isEmpty()){
             return new ResponseEntity<>("You are not the owner of this account", HttpStatus.FORBIDDEN);
         }
-        if (accountRepository.findByNumber(destinationAccount) == null){
+        if (accountService.getAccountByNumber(destinationAccount) == null){
             return new ResponseEntity<>("The destination account does not exist", HttpStatus.FORBIDDEN);
 
         }
-        if (accountRepository.findByNumber(originAccount).getBalance() < amount){
+        if (accountService.getAccountByNumber(originAccount).getBalance() < amount){
             return new ResponseEntity<>("Not enough balance to do this transaction", HttpStatus.FORBIDDEN);
         }
 
@@ -86,8 +89,8 @@ public class TransactionController {
         originAccountFromRepository.setBalance(originAccountFromRepository.getBalance() - amount);
         destinationAccountFromRepository.setBalance(destinationAccountFromRepository.getBalance() + amount);
 
-        accountRepository.save(originAccountFromRepository);
-        accountRepository.save(destinationAccountFromRepository);
+        accountService.saveAccount(originAccountFromRepository);
+        accountService.saveAccount(destinationAccountFromRepository);
 
         return new ResponseEntity<>("The transaction has been made",HttpStatus.CREATED);
 

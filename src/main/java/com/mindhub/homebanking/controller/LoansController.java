@@ -4,6 +4,8 @@ import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.service.AccountService;
+import com.mindhub.homebanking.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,19 +25,18 @@ import static java.util.stream.Collectors.toList;
 public class LoansController {
 
     @Autowired
-    LoanRepository loanRepository;
+    private LoanRepository loanRepository;
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountService accountService;
+    @Autowired
+    private  TransactionRepository transactionRepository;
 
     @Autowired
-    TransactionRepository transactionRepository;
-
-    @Autowired
-    ClientLoanRepository clientLoanRepository;
+    private ClientLoanRepository clientLoanRepository;
 
 
     @RequestMapping("/loans")
@@ -48,11 +49,11 @@ public class LoansController {
     @PostMapping("/loans")
     public ResponseEntity<Object> loanApplication(@RequestBody LoanApplicationDTO loan, Authentication authentication) {
 
-        Client currentClient = clientRepository.findByEmail(authentication.getName());
+        Client currentClient = clientService.getClientByEmail(authentication.getName());
 
         Loan currentLoan = loanRepository.findById(loan.getId()).orElse(null);
 
-        Account currentAccount = accountRepository.findByNumber(loan.getAccount());
+        Account currentAccount = accountService.getAccountByNumber(loan.getAccount());
         if (currentLoan == null){
             return new ResponseEntity<>("This loan doesn't exist", HttpStatus.FORBIDDEN);
         }
@@ -87,9 +88,9 @@ public class LoansController {
         currentClient.addClientLoan(newClientLoan);
         currentLoan.addClientLoan(newClientLoan);
 
-        clientRepository.save(currentClient);
+    /*   clientService.saveClient(currentClient);
         loanRepository.save(currentLoan);
-        accountRepository.save(currentAccount);
+        accountRepository.save(currentAccount);*/
         clientLoanRepository.save(newClientLoan);
         transactionRepository.save(newTransaction);
 

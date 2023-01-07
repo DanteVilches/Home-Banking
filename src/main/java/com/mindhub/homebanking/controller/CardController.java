@@ -3,7 +3,8 @@ package com.mindhub.homebanking.controller;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.service.CardService;
+import com.mindhub.homebanking.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,18 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
 public class CardController {
 
-    @Autowired
-    ClientRepository clientRepository;
 
     @Autowired
-    CardRepository cardRepository;
+    private ClientService clientService;
+    @Autowired
+    private CardService cardService;
+
+
     public Integer  getRandomNumber(int min, int max){
         return (int) ((Math.random() * (max-min))+min);
     }
@@ -35,7 +37,7 @@ public class CardController {
 
     @PostMapping("/clients/current/cards")
     ResponseEntity<Object> createNewCard(Authentication authentication, @RequestParam CardType cardType, @RequestParam CardColor cardColor){
-        Client currentClient = clientRepository.findByEmail(authentication.getName());
+        Client currentClient = clientService.getClientByEmail(authentication.getName());
 
 
         if (cardType == null || cardColor == null) {
@@ -48,7 +50,7 @@ public class CardController {
 
         Card newCard = new Card(currentClient.getFirstName()+" "+currentClient.getLastName(), cardType,cardColor,createRandomCard(),getRandomNumber(100,999),LocalDate.now().plusYears(5), LocalDate.now());
         currentClient.addCard(newCard);
-        cardRepository.save(newCard);
+        cardService.saveCard(newCard);
         return new ResponseEntity<>(HttpStatus.CREATED);
 }
 }
