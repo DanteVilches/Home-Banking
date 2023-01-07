@@ -102,7 +102,7 @@ Vue.createApp({
 				);
 		},
 		transferToOThers() {
-			if (this.chosenAccount || this.amountToOthers || this.accountDestination) {
+			if (this.chosenAccount && this.amountToOthers && this.accountDestination) {
 				if (this.accountDestination.includes("VIN")) {
 					Swal.fire({
 						text: `You are about to transfer  $${this.amountToOthers} from your account ${this.chosenAccount} to ${this.accountDestination}`,

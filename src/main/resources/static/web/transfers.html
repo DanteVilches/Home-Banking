@@ -201,7 +201,9 @@
 									<div class="d-flex justify-content-center flex-wrap">
 										<div class="w-25 me-4 w100Mobile">
 											<select class="form-select" v-model="chosenAccount">
-												<option value="">Origin Account</option>
+												<option value="" :disabled="chosenAccount != ''">
+													Origin Account
+												</option>
 												<option :value="account.number" v-for="account in accounts">
 													{{account.number}}
 												</option>
@@ -270,7 +272,9 @@
 									<div class="input-group mb-3 d-flex justify-content-center flex-wrap">
 										<div class="w-25 me-4 w100Mobile">
 											<select class="form-select" v-model="chosenAccountOrigin">
-												<option value="">Origin Account</option>
+												<option value="" :disabled="chosenAccountOrigin != ''">
+													Origin Account
+												</option>
 												<option
 													:value="account.number"
 													v-for="account in accounts"
@@ -293,7 +297,9 @@
 
 										<div class="w-25 w100Mobile">
 											<select class="form-select" v-model="chosenAccountDestination">
-												<option value="">Destination Account</option>
+												<option value="" :disabled="chosenAccountDestination != ''">
+													Destination Account
+												</option>
 												<option
 													:value="account.number"
 													v-for="account in accounts"

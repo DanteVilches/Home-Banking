@@ -6,19 +6,25 @@ Vue.createApp({
 			client: {},
 			clientName: "",
 			accounts: [],
-			chosenAccountOrigin: "",
-			chosenAccountDestination: "",
+			loans: [],
 			accountDestination: "",
 			chosenAccount: "",
-			amountBetweenAccounts: "",
-			amountToOthers: "",
-			descriptionToOthers: "",
-			descriptionBetweenAccounts: "",
+			chosenLoan: "",
+			loanSelected: {},
+			paymentsOfLoanSelected: [],
+			amount: 0,
+			maxAmount: "Max Amount allowed",
+			chosenPayment: "",
+			maxAmountNoFormat: "",
+			amountOfEachPayment: 0,
+			disabledOption: false,
+			disabledOption2: false,
 			logo: "./images/bank logo.png",
 		};
 	},
 	created() {
 		this.loadData();
+		this.loadLoans();
 		if (localStorage.getItem("dark-mode") === "true") {
 			this.logo = "./images/bank logo.png";
 		} else {
@@ -58,12 +64,22 @@ Vue.createApp({
 					this.client = data.data;
 					this.accounts = this.client.accountDTO.sort((a, b) => a.id - b.id);
 
-					this.loans = this.client.loans.sort((a, b) => a.id - b.id);
-
 					this.clientName = `${this.client.firstName} ${this.client.lastName}`;
 				})
 				.catch((error) => console.log(error));
 		},
+		loadLoans() {
+			axios
+				.get("http://localhost:8080/api/loans")
+				.then((data) => {
+					this.loans = data.data;
+				})
+				.catch((error) => {
+					console.log("loans error");
+					console.log(error);
+				});
+		},
+
 		shuffle() {
 			return this.arrayOfColours.sort(() => Math.random() - 0.5);
 		},
@@ -101,76 +117,42 @@ Vue.createApp({
 					console.log("signed out!!!")
 				);
 		},
-		transferToOThers() {
-			if (this.chosenAccount || this.amountToOthers || this.accountDestination) {
-				if (this.accountDestination.includes("VIN")) {
-					Swal.fire({
-						text: `You are about to transfer  $${this.amountToOthers} from your account ${this.chosenAccount} to ${this.accountDestination}`,
-						icon: "info",
-						showCancelButton: true,
-						confirmButtonColor: "#3085d6",
-						cancelButtonColor: "#d33",
-						confirmButtonText: "Yes, Transfer",
-					}).then((result) => {
-						if (result.isConfirmed) {
-							axios
-								.post(
-									"/api/clients/current/transactions",
-									`amount=${this.amountToOthers}&description=${this.descriptionToOthers}&originAccount=${this.chosenAccount}&destinationAccount=${this.accountDestination}`
-								)
-								.then((response) => {
-									Swal.fire("Transfered!", "Your money has been transfered", "success");
-								})
-								.catch((error) => {
-									console.log("error from post");
-									console.log(error);
-									if (error.response.status == 403) {
-										Swal.fire({
-											icon: "error",
-											title: error.response.data,
-											text: "Please choose a valid amount",
-										});
-									}
-								});
-						}
-					});
-				} else {
-					Swal.fire({
-						icon: "error",
-						title: "Destination account not valid",
-						text: "Please correct the account destination field",
-					});
-				}
-			} else {
-				Swal.fire({
-					icon: "error",
-					title: "Fields are empty",
-					text: "Please complete the fields",
-				});
-			}
-		},
-		transfer() {
+		getALoan() {
+			console.log(this.amount);
 			if (
-				this.chosenAccountOrigin ||
-				this.amountBetweenAccounts ||
-				this.chosenAccountDestination
+				this.amount &&
+				this.chosenLoan &&
+				this.chosenPayment &&
+				this.chosenAccount
 			) {
 				Swal.fire({
-					text: `You are about to transfer  $${this.amountBetweenAccounts} from your account ${this.chosenAccountOrigin} to ${this.chosenAccountDestination}`,
+					text: `You are about to get a ${
+						this.loanSelected.name
+					} loan with an amount of ${this.formatCurrency(this.amount)} in ${
+						this.chosenPayment
+					} payments and the amount will be transfered to your account ${
+						this.chosenAccount
+					}, do you wanna get this loan?`,
 					icon: "info",
 					showCancelButton: true,
 					confirmButtonColor: "#3085d6",
 					cancelButtonColor: "#d33",
-					confirmButtonText: "Yes, Transfer",
+					confirmButtonText: "Yes, get this loan",
 				}).then((result) => {
 					if (result.isConfirmed) {
 						axios
-							.post(
-								"/api/clients/current/transactions",
-								`amount=${this.amountBetweenAccounts}&description=${this.descriptionBetweenAccounts}&originAccount=${this.chosenAccountOrigin}&destinationAccount=${this.chosenAccountDestination}`
-							)
+							.post("/api/loans", {
+								id: this.chosenLoan,
+								amount: this.amount,
+								payments: this.chosenPayment,
+								account: this.chosenAccount,
+							})
 							.then((response) => {
-								Swal.fire("Transfered!", "Your money has been transfered", "success");
+								Swal.fire(
+									"Success!",
+									"the money  from the loan has been transfered to your account",
+									"success"
+								);
 							})
 							.catch((error) => {
 								console.log("error from post");
@@ -179,7 +161,7 @@ Vue.createApp({
 									Swal.fire({
 										icon: "error",
 										title: error.response.data,
-										text: "Please choose a valid amount",
+										text: "Please correct the fields",
 									});
 								}
 							});
@@ -192,6 +174,20 @@ Vue.createApp({
 					text: "Please complete the fields",
 				});
 			}
+		},
+		showPayments(event) {
+			this.loanSelected = this.loans.find((loan) => loan.id == event.target.value);
+			this.paymentsOfLoanSelected = this.loanSelected.payments;
+			this.maxAmount = this.formatCurrency(this.loanSelected.maxAmount);
+			this.maxAmountNoFormat = this.loanSelected.maxAmount;
+
+			this.disabledOption = true;
+		},
+		paymentSelected(event) {
+			this.amountOfEachPayment = this.formatCurrency(
+				this.amount / parseInt(event.target.value)
+			);
+			this.disabledOption2 = true;
 		},
 	},
 

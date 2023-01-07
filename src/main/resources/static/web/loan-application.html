@@ -182,11 +182,15 @@
 							class="d-flex justify-content-center flex-column align-items-center gap-3 flex-wrap bg-opacity-50 bg-white p-4 rounded-4 w-25"
 						>
 							<div class="w-75 w100Mobile">
-								<select class="form-select" v-model="chosenAccount">
-									<option value="" class="text-center">Loan</option>
-									<option :value="account.number" v-for="account in accounts">
-										{{account.number}}
+								<select
+									class="form-select"
+									v-model="chosenLoan"
+									v-on:change="showPayments"
+								>
+									<option value="" class="text-center" :disabled="disabledOption">
+										Loan
 									</option>
+									<option :value="loan.id" v-for="loan in loans">{{loan.name}}</option>
 								</select>
 							</div>
 							<div class="input-group w-75 w100Mobile">
@@ -194,30 +198,44 @@
 								<input
 									type="number"
 									class="form-control"
-									placeholder="Amount"
-									v-model="amountToOthers"
+									:title="'Max amount allowed: ' + maxAmount"
+									:placeholder="maxAmount"
+									v-model="amount"
+									:max="maxAmountNoFormat"
 								/>
 							</div>
 
 							<div class="w-75 w100Mobile">
-								<select class="form-select" v-model="chosenAccount">
-									<option value="" class="text-center">Payments</option>
-									<option :value="account.number" v-for="account in accounts">
-										{{account.number}}
+								<select
+									class="form-select"
+									v-model="chosenPayment"
+									v-on:change="paymentSelected"
+								>
+									<option value="" class="text-center" :disabled="disabledOption2">
+										Payments
+									</option>
+									<option :value="payment" v-for="payment in paymentsOfLoanSelected">
+										{{payment}}
 									</option>
 								</select>
 							</div>
+
+							<p class="text-white">Amount of each Payment: {{amountOfEachPayment}}</p>
 
 							<div class="w-75 w100Mobile">
 								<select class="form-select" v-model="chosenAccount">
-									<option value="" class="text-center">Origin Account</option>
+									<option value="" class="text-center" :disabled="chosenAccount != ''">
+										Destination Account
+									</option>
 									<option :value="account.number" v-for="account in accounts">
 										{{account.number}}
 									</option>
 								</select>
 							</div>
 
-							<button type="button" class="btn btn-primary">Get your loan</button>
+							<button type="button" class="btn btn-primary" @click.prevent="getALoan">
+								Get your loan
+							</button>
 						</div>
 					</div>
 					<div
