@@ -7,6 +7,7 @@ import com.mindhub.homebanking.models.TransactionType;
 import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
+import com.mindhub.homebanking.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +24,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
-
-
-
     @Autowired
     private AccountService accountService;
-
     @Autowired
     private ClientService clientService;
 
     @Autowired
-    private TransactionRepository transactionRepository;
-
+    private TransactionService transactionService;
 
     @Transactional
     @PostMapping("/clients/current/transactions")
@@ -83,8 +79,8 @@ public class TransactionController {
         originAccountFromRepository.addTransaction(debitTransaction);
         destinationAccountFromRepository.addTransaction(creditTransaction);
 
-        transactionRepository.save(debitTransaction);
-        transactionRepository.save(creditTransaction);
+        transactionService.saveTransaction(debitTransaction);
+        transactionService.saveTransaction(creditTransaction);
 
         originAccountFromRepository.setBalance(originAccountFromRepository.getBalance() - amount);
         destinationAccountFromRepository.setBalance(destinationAccountFromRepository.getBalance() + amount);

@@ -4,8 +4,7 @@ import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
-import com.mindhub.homebanking.service.AccountService;
-import com.mindhub.homebanking.service.ClientService;
+import com.mindhub.homebanking.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,23 +24,22 @@ import static java.util.stream.Collectors.toList;
 public class LoansController {
 
     @Autowired
-    private LoanRepository loanRepository;
-
+    private LoanService loanService;
     @Autowired
     private ClientService clientService;
 
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private  TransactionRepository transactionRepository;
 
     @Autowired
-    private ClientLoanRepository clientLoanRepository;
+    private TransactionService transactionService;
 
+    @Autowired
+    private ClientLoanService clientLoanService;
 
     @RequestMapping("/loans")
     public List<LoanDTO> getLoans() {
-        return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());
+        return loanService.getAllLoans().stream().map(loan -> new LoanDTO(loan)).collect(toList());
     }
 
 
@@ -51,7 +49,7 @@ public class LoansController {
 
         Client currentClient = clientService.getClientByEmail(authentication.getName());
 
-        Loan currentLoan = loanRepository.findById(loan.getId()).orElse(null);
+        Loan currentLoan =    loanService.getLoanById(loan.getId());
 
         Account currentAccount = accountService.getAccountByNumber(loan.getAccount());
         if (currentLoan == null){
@@ -91,8 +89,8 @@ public class LoansController {
     /*   clientService.saveClient(currentClient);
         loanRepository.save(currentLoan);
         accountRepository.save(currentAccount);*/
-        clientLoanRepository.save(newClientLoan);
-        transactionRepository.save(newTransaction);
+        clientLoanService.saveClientLoan(newClientLoan);
+        transactionService.saveTransaction(newTransaction);
 
         return new ResponseEntity<>("Loan has been successfully acquired ",HttpStatus.CREATED);
     }

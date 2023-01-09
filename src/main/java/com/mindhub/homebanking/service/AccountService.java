@@ -4,6 +4,8 @@ import com.mindhub.homebanking.models.Account;
 
 import java.util.List;
 
+
+
 public interface AccountService {
 
     List<Account> getAllAccounts();
