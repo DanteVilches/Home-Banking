@@ -49,6 +49,30 @@
 						<!-- <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> -->
 						<span>{{clientName}}</span>
 					</button>
+					<div class="dropdown hamburgerMenu">
+						<button
+							class="btn btn-secondary dropdown-toggle"
+							type="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							Menu
+						</button>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li>
+								<a class="dropdown-item" href="./accounts.html">Accounts</a>
+							</li>
+							<li><a class="dropdown-item" href="./cards.html">Credit Cards</a></li>
+							<li>
+								<a class="dropdown-item active" href="#">Get a Loan</a>
+							</li>
+							<li><a class="dropdown-item" href="./transfers.html">Transfers</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li>
+								<a class="dropdown-item" href="#" @click.prevent="logOut">Log out</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="app-content">
@@ -179,7 +203,7 @@
 
 					<div class="d-flex justify-content-center w-100">
 						<div
-							class="d-flex justify-content-center flex-column align-items-center gap-3 flex-wrap bg-opacity-50 bg-white p-4 rounded-4 w-25"
+							class="d-flex justify-content-center flex-column align-items-center gap-3 flex-wrap bg-opacity-50 bg-white p-4 rounded-4 w-25 w100Mobile w75Mobile"
 						>
 							<div class="w-75 w100Mobile">
 								<select

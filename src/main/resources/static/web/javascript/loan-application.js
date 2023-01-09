@@ -12,6 +12,7 @@ Vue.createApp({
 			chosenLoan: "",
 			loanSelected: {},
 			paymentsOfLoanSelected: [],
+			clientLoans: [],
 			amount: 0,
 			maxAmount: "Max Amount allowed",
 			chosenPayment: "",
@@ -63,7 +64,6 @@ Vue.createApp({
 				.then((data) => {
 					this.client = data.data;
 					this.accounts = this.client.accountDTO.sort((a, b) => a.id - b.id);
-
 					this.clientName = `${this.client.firstName} ${this.client.lastName}`;
 				})
 				.catch((error) => console.log(error));
@@ -180,7 +180,7 @@ Vue.createApp({
 			this.paymentsOfLoanSelected = this.loanSelected.payments;
 			this.maxAmount = this.formatCurrency(this.loanSelected.maxAmount);
 			this.maxAmountNoFormat = this.loanSelected.maxAmount;
-
+			z;
 			this.disabledOption = true;
 		},
 		paymentSelected(event) {

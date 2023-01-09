@@ -58,6 +58,9 @@ public class LoansController {
         if(loan.getId() == null){
             return new ResponseEntity<>("Loan id can't be empty.", HttpStatus.FORBIDDEN);
         }
+        if (!currentClient.getClientLoans().stream().filter(clientLoan -> clientLoan.getLoan().getName().equals(currentLoan.getName())).collect(Collectors.toSet()).isEmpty()){
+            return new ResponseEntity<>("You already own a loan of this type", HttpStatus.FORBIDDEN);
+        }
         if (loan.getPayments() == null){
             return new ResponseEntity<>("Payments are incorrect", HttpStatus.FORBIDDEN);
         }

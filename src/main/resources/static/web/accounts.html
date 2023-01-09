@@ -53,6 +53,28 @@
 						<!-- <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> -->
 						<span>{{clientName}}</span>
 					</button>
+					<div class="dropdown hamburgerMenu">
+						<button
+							class="btn btn-secondary dropdown-toggle"
+							type="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							Menu
+						</button>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li><a class="dropdown-item active" href="#">Accounts</a></li>
+							<li><a class="dropdown-item" href="./cards.html">Credit Cards</a></li>
+							<li>
+								<a class="dropdown-item" href="./loan-application.html">Get a Loan</a>
+							</li>
+							<li><a class="dropdown-item" href="./transfers.html">Transfers</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li>
+								<a class="dropdown-item" href="#" @click.prevent="logOut">Log out</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="app-content">

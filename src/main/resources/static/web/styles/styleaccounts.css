@@ -894,6 +894,15 @@ body {
 	border-color: #125688;
 }
 
+.hamburgerMenu {
+	display: none;
+}
+
+@media screen and (max-width: 1024px) {
+	.w75Mobile {
+		width: 75% !important;
+	}
+}
 @media screen and (max-width: 980px) {
 	.project-boxes.jsGridView .project-box-wrapper {
 		width: 50%;
@@ -911,13 +920,17 @@ body {
 	}
 }
 @media screen and (max-width: 720px) {
+	.hamburgerMenu {
+		display: block !important;
+	}
+	.w100Mobile {
+		width: 100% !important;
+	}
 	.app-name,
 	.profile-btn span {
 		display: none;
 	}
-	.hamburgerMenu {
-		display: block !important;
-	}
+
 	.sidebar,
 	.app-icon {
 		display: none !important;
