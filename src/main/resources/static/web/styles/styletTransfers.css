@@ -895,6 +895,18 @@ body {
 	background: #fefefe;
 	border-color: #125688;
 }
+.btn-secondary {
+	background-color: var(--main-color);
+	color: var(--app-container) !important;
+}
+
+.dropdown-menu-dark {
+	background-color: var(--main-color) !important;
+	color: var(--app-container) !important;
+}
+.dropdown-item {
+	color: var(--app-container) !important;
+}
 
 @media screen and (max-width: 980px) {
 	.project-boxes.jsGridView .project-box-wrapper {

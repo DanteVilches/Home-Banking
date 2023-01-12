@@ -227,7 +227,7 @@
 													Origin Account
 												</option>
 												<option :value="account.number" v-for="account in accounts">
-													{{account.number}}
+													{{account.number}} - Balance: {{formatCurrency(account.balance)}}
 												</option>
 											</select>
 										</div>
@@ -302,7 +302,7 @@
 													v-for="account in accounts"
 													:disabled="account.number === chosenAccountDestination"
 												>
-													{{account.number}}
+													{{account.number}} - Balance: {{formatCurrency(account.balance)}}
 												</option>
 											</select>
 										</div>
@@ -327,7 +327,7 @@
 													v-for="account in accounts"
 													:disabled="account.number === chosenAccountOrigin"
 												>
-													{{account.number}}
+													{{account.number}} - Balance: {{formatCurrency(account.balance)}}
 												</option>
 											</select>
 										</div>

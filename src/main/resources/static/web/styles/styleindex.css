@@ -736,6 +736,17 @@ section .container.active .signinBx .imgBx {
 	left: -100%;
 }
 
+.btn-secondary {
+	background-color: var(--main-color);
+	color: var(--app-container) !important;
+}
+.dropdown-menu-dark {
+	background-color: var(--main-color) !important;
+	color: var(--app-container) !important;
+}
+.dropdown-item {
+	color: var(--app-container) !important;
+}
 @media (max-width: 991px) {
 	section .container {
 		max-width: 400px;

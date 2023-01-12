@@ -20,6 +20,7 @@
 	</head>
 	<body>
 		<div class="app-container" id="app">
+			{{calculateAmount}}
 			<div class="app-header">
 				<div class="app-header-left">
 					<img :src="logo" alt="" style="width: 64px" />
@@ -211,7 +212,7 @@
 									v-model="chosenLoan"
 									v-on:change="showPayments"
 								>
-									<option value="" class="text-center" :disabled="disabledOption">
+									<option value="" class="text-center" :disabled="chosenLoan != ''">
 										Loan
 									</option>
 									<option :value="loan.id" v-for="loan in loans">{{loan.name}}</option>
@@ -244,7 +245,7 @@
 								</select>
 							</div>
 
-							<p class="text-white">Amount of each Payment: {{amountOfEachPayment}}</p>
+							<p class="fontColor">Amount of each Payment: {{amountOfEachPayment}}</p>
 
 							<div class="w-75 w100Mobile">
 								<select class="form-select" v-model="chosenAccount">
@@ -252,7 +253,7 @@
 										Destination Account
 									</option>
 									<option :value="account.number" v-for="account in accounts">
-										{{account.number}}
+										{{account.number}} - Balance: {{formatCurrency(account.balance)}}
 									</option>
 								</select>
 							</div>

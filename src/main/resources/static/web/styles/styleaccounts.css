@@ -391,6 +391,9 @@ body {
 .app-icon:after {
 	bottom: -6px;
 }
+.fontColor {
+	color: var(--main-color);
+}
 .app-name {
 	color: var(--main-color);
 	margin: 0;
@@ -897,6 +900,17 @@ body {
 .hamburgerMenu {
 	display: none;
 }
+.btn-secondary {
+	background-color: var(--main-color);
+	color: var(--app-container) !important;
+}
+.dropdown-menu-dark {
+	background-color: var(--main-color) !important;
+	color: var(--app-container) !important;
+}
+.dropdown-item {
+	color: var(--app-container) !important;
+}
 
 @media screen and (max-width: 1024px) {
 	.w75Mobile {
@@ -965,6 +979,10 @@ body {
 @media screen and (max-width: 520px) {
 	.projects-section {
 		overflow: auto;
+	}
+	.tittle {
+		font-size: 18px !important;
+		text-align: center;
 	}
 
 	.project-boxes {

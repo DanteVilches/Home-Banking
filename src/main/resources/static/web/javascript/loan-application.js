@@ -13,7 +13,7 @@ Vue.createApp({
 			loanSelected: {},
 			paymentsOfLoanSelected: [],
 			clientLoans: [],
-			amount: 0,
+			amount: "",
 			maxAmount: "Max Amount allowed",
 			chosenPayment: "",
 			maxAmountNoFormat: "",
@@ -191,5 +191,15 @@ Vue.createApp({
 		},
 	},
 
-	computed: {},
+	computed: {
+		calculateAmount() {
+			if (this.amount === "" || this.chosenPayment === "") {
+				this.amountOfEachPayment = 0;
+			} else {
+				this.amountOfEachPayment = this.formatCurrency(
+					this.amount / this.chosenPayment
+				);
+			}
+		},
+	},
 }).mount("#app");
