@@ -37,7 +37,7 @@ public class LoansController {
     @Autowired
     private ClientLoanService clientLoanService;
 
-    @RequestMapping("/loans")
+    @GetMapping("/loans")
     public List<LoanDTO> getLoans() {
         return loanService.getAllLoans().stream().map(loan -> new LoanDTO(loan)).collect(toList());
     }
@@ -89,9 +89,9 @@ public class LoansController {
         currentClient.addClientLoan(newClientLoan);
         currentLoan.addClientLoan(newClientLoan);
 
-    /*   clientService.saveClient(currentClient);
-        loanRepository.save(currentLoan);
-        accountRepository.save(currentAccount);*/
+        clientService.saveClient(currentClient);
+        loanService.saveLoan(currentLoan);
+        accountService.saveAccount(currentAccount);
         clientLoanService.saveClientLoan(newClientLoan);
         transactionService.saveTransaction(newTransaction);
 

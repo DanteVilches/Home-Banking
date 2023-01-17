@@ -12,9 +12,11 @@ const app = createApp({
 			transactions: [],
 			accountName: "",
 			clientName: "",
+			cardAboutToDelete: "",
 			logo: "./images/bank logo.png",
 			accountBalance: "",
 			Localtime: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
+
 			type: "",
 		};
 	},
@@ -59,7 +61,6 @@ const app = createApp({
 		loadData() {
 			axios.get("http://localhost:8080/api/clients/current").then((json) => {
 				this.cards = json.data.cardDTO.sort((a, b) => a.id - b.id);
-
 				this.clientName = json.data.firstName + " " + json.data.lastName;
 			});
 		},
@@ -122,6 +123,24 @@ const app = createApp({
 						});
 					}
 				});
+		},
+		deleteCard() {
+			axios
+				.patch("/api/clients/current/cards", "id=" + this.cardAboutToDelete)
+				.then((response) => {
+					this.cardAboutToDelete = null;
+					Swal.fire("Deleted", "", "success");
+					this.loadData();
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		expiredDate(date) {
+			let expiredBd = new Date(date);
+			expiredBd.setHours(0, 0, 0, 0);
+			let currentDate = new Date();
+			return expiredBd <= currentDate;
 		},
 	},
 

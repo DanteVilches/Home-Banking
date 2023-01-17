@@ -26,6 +26,8 @@ public class Card {
 
     private LocalDate fromDate;
 
+    private Boolean isEnabled;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Client client;
@@ -41,6 +43,7 @@ public class Card {
         this.cvv = cvv;
         this.thruDate = thruDate;
         this.fromDate = fromDate;
+        this.isEnabled = true;
     }
 
     public Long getId() {
@@ -110,5 +113,13 @@ public class Card {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Boolean getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
     }
 }

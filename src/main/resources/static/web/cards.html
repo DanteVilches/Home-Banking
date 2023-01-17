@@ -201,27 +201,88 @@
 						class="projects-section-header d-flex justify-content-between"
 						v-if="cards.length < 6"
 					>
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-bs-toggle="modal"
-							data-bs-target="#createCardModal"
-						>
-							Add a new Card
-						</button>
+						<div class="d-flex gap-2">
+							<button
+								type="button"
+								class="btn btn-secondary"
+								data-bs-toggle="modal"
+								data-bs-target="#createCardModal"
+							>
+								Add a new Card
+							</button>
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-toggle="modal"
+								data-bs-target="#createCardModal2"
+							>
+								Delete a card
+							</button>
+						</div>
+
 						<p class="time">{{Localtime}}</p>
 					</div>
 					<div
-						class="projects-section-header d-flex justify-content-end"
+						class="projects-section-header d-flex justify-content-between"
 						v-if="cards.length > 5"
 					>
+						<button
+							type="button"
+							class="btn btn-danger"
+							data-bs-toggle="modal"
+							data-bs-target="#createCardModal2"
+						>
+							Delete a card
+						</button>
 						<p class="time">{{Localtime}}</p>
+					</div>
+					<div class="modal" id="createCardModal2">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Delete a card</h1>
+								</div>
+								<div class="modal-body">
+									<div class="form-check" v-for="card in cards">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="flexRadioDefault"
+											id="flexRadioDefault1"
+											:value="card.id"
+											v-model="cardAboutToDelete"
+										/>
+										<label class="form-check-label" for="flexRadioDefault1">
+											({{card.number}}) | {{card.type}} | {{card.color}}
+										</label>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button
+										type="button"
+										class="btn btn-secondary"
+										data-bs-dismiss="modal"
+									>
+										Close
+									</button>
+									<button
+										type="button"
+										class="btn btn-primary"
+										@click.prevent="deleteCard"
+										data-bs-dismiss="modal"
+									>
+										Delete Card
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="modal" id="createCardModal">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalLabel">
+									<h1 class="modal-title fs-5" id="exampleModalLabel1">
 										Create a new Card
 									</h1>
 								</div>
@@ -309,7 +370,10 @@
 					<div
 						class="d-flex justify-content-center gap-5 align-items-center h-100 flex-wrap"
 					>
-						<div class="d-flex flex-wrap" v-for="card in cards">
+						<div class="d-flex flex-wrap flex-column" v-for="card in cards">
+							<p v-if="expiredDate(card.thruDate)" class="text-warning text-center">
+								This card has Expired
+							</p>
 							<div class="card creditCard animate__animated animate__slideInDown">
 								<div :class="'card__front card__parts ' +card.type+card.color">
 									<img

@@ -2,6 +2,7 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.utils.CardUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,14 +21,14 @@ import java.util.List;
 public class HomebankingApplication {
 
 
-	/*@Autowired
-	private PasswordEncoder passwordEncoder;*/
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository,
 									  AccountRepository accountRepository,
 									  TransactionRepository transactionRepository,
@@ -112,13 +113,14 @@ public class HomebankingApplication {
 			Card goldDebitCardMelba = new Card(melba.getFirstName()+ " " +melba.getLastName(), CardType.DEBIT,CardColor.GOLD,"4254 3219 3240 8359", 399, LocalDate.now(), LocalDate.now().minusDays(25));
 			Card titaniumDebitCardMelba= new Card(melba.getFirstName()+ " " +melba.getLastName(), CardType.CREDIT,CardColor.TITANIUM,"2576 0378 1257 6487", 274, LocalDate.now(), LocalDate.now().minusDays(25));
 			Card silverCreditCardMartin = new Card(martin.getFirstName()+ " " +martin.getLastName(),CardType.CREDIT,CardColor.SILVER,"8763 2673 1823 2434",421, LocalDate.now(),LocalDate.now().minusDays(12).minusYears(3));
+			Card expiredCreditCard = new Card(melba.getFirstName()+ " "+melba.getLastName(),CardType.CREDIT,CardColor.SILVER, CardUtils.createRandomCard(),CardUtils.generateCVV(),LocalDate.now().minusYears(2),LocalDate.now());
 
-
+			melba.addCard(expiredCreditCard);
 			melba.addCard(goldDebitCardMelba);
 			melba.addCard(titaniumDebitCardMelba);
 			martin.addCard(silverCreditCardMartin);
 
-
+			cardRepository.save(expiredCreditCard);
 			cardRepository.save(goldDebitCardMelba);
 			cardRepository.save(titaniumDebitCardMelba);
 			cardRepository.save(silverCreditCardMartin);
@@ -128,7 +130,7 @@ public class HomebankingApplication {
 
 
 		};
-	}*/
+	}
 
 
 
