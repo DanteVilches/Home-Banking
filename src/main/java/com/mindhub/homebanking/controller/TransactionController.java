@@ -4,7 +4,6 @@ import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
 import com.mindhub.homebanking.service.TransactionService;
@@ -74,8 +73,8 @@ public class TransactionController {
             return new ResponseEntity<>("Not enough balance to do this transaction", HttpStatus.FORBIDDEN);
         }
 
-        Transaction debitTransaction = new Transaction(TransactionType.DEBIT,-amount,description+" "+destinationAccount,LocalDateTime.now());
-        Transaction creditTransaction= new Transaction(TransactionType.CREDIT,amount,description+" "+originAccount,LocalDateTime.now());
+        Transaction debitTransaction = new Transaction(TransactionType.DEBIT,-amount,description+" - "+destinationAccount,LocalDateTime.now(),originAccountFromRepository.getBalance()-amount);
+        Transaction creditTransaction= new Transaction(TransactionType.CREDIT,amount,description+" - "+originAccount,LocalDateTime.now(),destinationAccountFromRepository.getBalance()+amount);
         originAccountFromRepository.addTransaction(debitTransaction);
         destinationAccountFromRepository.addTransaction(creditTransaction);
 

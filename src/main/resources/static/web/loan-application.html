@@ -218,6 +218,9 @@
 									<option :value="loan.id" v-for="loan in loans">{{loan.name}}</option>
 								</select>
 							</div>
+							<p class="fontColor">
+								Percentage of interest of this loan: {{percentageOfLoan}}%
+							</p>
 							<div class="input-group w-75 w100Mobile">
 								<span class="input-group-text">$</span>
 								<input

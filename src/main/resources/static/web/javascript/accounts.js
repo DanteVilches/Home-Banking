@@ -8,6 +8,7 @@ Vue.createApp({
 			accounts: [],
 			loans: [],
 			index: "",
+			accountAboutToDelete: "",
 			logo: "./images/bank logo.png",
 			arrayOfColours: ["#fee4cb", "#e9e7fd", "#ffd3e2", "#c8f7dc", "#d5deff"],
 		};
@@ -96,19 +97,53 @@ Vue.createApp({
 					console.log("signed out!!!")
 				);
 		},
-		createAccount() {
+		async createAccount() {
+			const inputOptions = {
+				CHECKING: "Credit",
+				SAVINGS: "Savings",
+			};
+
 			Swal.fire({
-				title: "Do you want to create a new account?",
+				title: "Choose the account type?",
 				icon: "info",
+				input: "radio",
+				inputOptions: inputOptions,
 				showCancelButton: true,
 				confirmButtonText: "Create",
 			}).then((result) => {
 				/* Read more about isConfirmed, isDenied below */
+				if (result.value) {
+					if (result.isConfirmed) {
+						axios
+							.post("/api/clients/current/accounts", "accountType=" + result.value)
+							.then((response) => {
+								this.loadData();
+							});
+						Swal.fire("Created!", "", "success");
+					}
+				} else {
+					Swal.fire("Choose an account type", "", "info");
+				}
+			});
+		},
+		deleteAccount(id) {
+			Swal.fire({
+				title: "Do you wanna delete this account?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Delete",
+			}).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
 				if (result.isConfirmed) {
-					axios.post("/api/clients/current/accounts").then((response) => {
-						this.loadData();
-					});
-					Swal.fire("Created!", "", "success");
+					axios
+						.patch("/api/clients/current/accounts", "id=" + id)
+						.then((response) => {
+							Swal.fire("Deleted", "", "success");
+							this.loadData();
+						})
+						.catch((error) => {
+							console.log(error);
+						});
 				}
 			});
 		},

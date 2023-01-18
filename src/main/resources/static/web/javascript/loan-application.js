@@ -17,6 +17,7 @@ Vue.createApp({
 			maxAmount: "Max Amount allowed",
 			chosenPayment: "",
 			maxAmountNoFormat: "",
+			percentageOfLoan: 0,
 			amountOfEachPayment: 0,
 			disabledOption: false,
 			disabledOption2: false,
@@ -180,7 +181,7 @@ Vue.createApp({
 			this.paymentsOfLoanSelected = this.loanSelected.payments;
 			this.maxAmount = this.formatCurrency(this.loanSelected.maxAmount);
 			this.maxAmountNoFormat = this.loanSelected.maxAmount;
-			z;
+			this.percentageOfLoan = this.loanSelected.interestPercentage;
 			this.disabledOption = true;
 		},
 		paymentSelected(event) {
@@ -197,7 +198,7 @@ Vue.createApp({
 				this.amountOfEachPayment = 0;
 			} else {
 				this.amountOfEachPayment = this.formatCurrency(
-					this.amount / this.chosenPayment
+					(this.amount * (this.percentageOfLoan * 0.01 + 1)) / this.chosenPayment
 				);
 			}
 		},

@@ -2,6 +2,8 @@ package com.mindhub.homebanking.controller;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
+import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.Client;
 
 import com.mindhub.homebanking.service.AccountService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,7 +34,7 @@ public class AccountController {
 
     @GetMapping("/accounts")
     public List<AccountDTO> getAccounts() {
-        return accountService.getAllAccounts().stream().map(account -> new AccountDTO(account)).collect(toList());
+        return accountService.getAllAccounts().stream().filter(account -> account.getEnabled().equals(true)).map(account -> new AccountDTO(account)).collect(toList());
     }
 
     @GetMapping("/accounts/{id}")
@@ -41,10 +44,18 @@ public class AccountController {
     }
 
     @PostMapping("/clients/current/accounts")
-    ResponseEntity<Object> createNewAccount(Authentication authentication){
+    ResponseEntity<Object> createNewAccount(Authentication authentication, @RequestParam AccountType accountType){
         Client currentClient = clientService.getClientByEmail(authentication.getName());
-        if (currentClient.getAccounts().size() < 3){
-            Account newAccount = new Account("VIN-"+ CardUtils.getRandomNumber(10000000,99999999),LocalDateTime.now(),0D);
+        if (currentClient == null){
+            return new ResponseEntity<>("You're not authenticated", HttpStatus.FORBIDDEN);
+        }
+
+
+    if(accountType == null){
+        return new ResponseEntity<>("Invalid account type", HttpStatus.FORBIDDEN);
+    }
+        if (currentClient.getAccounts().stream().filter(account -> account.getEnabled().equals(true)).collect(Collectors.toSet()).size() < 3){
+            Account newAccount = new Account("VIN-"+ CardUtils.getRandomNumber(10000000,99999999),LocalDateTime.now(),0D,accountType);
             currentClient.addAccount(newAccount);
             accountService.saveAccount(newAccount);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -53,7 +64,31 @@ public class AccountController {
         }
     }
 
+    @PatchMapping("/clients/current/accounts")
+    ResponseEntity<Object> deleteAccount(Authentication authentication, @RequestParam Long id ){
+        Client currentClient = clientService.getClientByEmail(authentication.getName());
+        Account currentAccount = accountService.getAccountById(id);
 
+
+        if (!currentClient.getAccounts().contains(currentAccount)){
+            return new ResponseEntity<>("You're not this account Owner", HttpStatus.FORBIDDEN);
+        }
+        if (currentAccount == null){
+            return new ResponseEntity<>("This account doesn't exist", HttpStatus.FORBIDDEN);
+        }
+        if (currentAccount.getBalance() > 0){
+            return new ResponseEntity<>("This account has balance!", HttpStatus.FORBIDDEN);
+        }
+        if (currentAccount.getEnabled().equals(false)){
+            return new ResponseEntity<>("This account is already 'deleted' ", HttpStatus.FORBIDDEN);
+        }
+
+
+
+        currentAccount.setEnabled(false);
+        accountService.saveAccount(currentAccount);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
 
 }

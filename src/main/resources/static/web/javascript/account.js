@@ -21,6 +21,7 @@ const app = createApp({
 		let params = new URLSearchParams(queryString);
 		this.id = params.get("id");
 		this.loadAllAccounts();
+
 		if (localStorage.getItem("dark-mode") === "true") {
 			this.logo = "./images/bank logo.png";
 		} else {

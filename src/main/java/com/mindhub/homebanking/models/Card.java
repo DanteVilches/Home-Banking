@@ -122,4 +122,6 @@ public class Card {
     public void setEnabled(Boolean enabled) {
         isEnabled = enabled;
     }
+
+
 }

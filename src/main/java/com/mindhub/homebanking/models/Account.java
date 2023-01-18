@@ -20,6 +20,9 @@ public class Account {
 
     private Double balance;
 
+    private Boolean isEnabled;
+
+    private AccountType accountType;
     @ManyToOne(fetch = FetchType.EAGER)
     private Client client;
 
@@ -30,11 +33,12 @@ public class Account {
     public Account() {
     }
 
-    public Account(String number, LocalDateTime creationDate, Double balance) {
+    public Account(String number, LocalDateTime creationDate, Double balance, AccountType accountType) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
-
+        this.isEnabled = true;
+        this.accountType = accountType;
     }
 
     public Long getId() {
@@ -73,9 +77,27 @@ public class Account {
         this.client = client;
     }
 
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
     public Set<Transaction> getTransactions() {
         return transactions;
     }
+
+
 
     public void addTransaction(Transaction transaction) {
         transaction.setAccount(this);

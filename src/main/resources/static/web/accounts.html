@@ -245,11 +245,12 @@
 									:key="index"
 									:style="{backgroundColor: arrayOfColours[index % arrayOfColours.length]}"
 								>
-									<div class="project-box-header">
+									<div class="project-box-header d-flex justify-content-between">
 										<span
 											>{{formatDate(account.creationDate)}}
 											{{formatTime(account.creationDate)}}</span
 										>
+										<span>{{account.accountType}} Account</span>
 									</div>
 									<div class="project-box-content-header">
 										<p class="box-content-header">{{account.number}}</p>
@@ -257,13 +258,21 @@
 											Balance {{formatCurrency(account.balance)}}
 										</p>
 									</div>
-									<div class="d-flex justify-content-center">
+									<div class="d-flex gap-2 justify-content-center">
 										<a
 											:href="'./account.html?id='+account.id"
 											type="button"
 											class="btn btn-dark"
 											>Transactions</a
 										>
+										<button
+											type="button"
+											class="btn btn-danger"
+											@click.prevent="deleteAccount(account.id)"
+											v-if="account.balance==0"
+										>
+											Delete Account
+										</button>
 									</div>
 								</div>
 							</div>

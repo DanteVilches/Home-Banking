@@ -246,6 +246,9 @@
 									>
 										{{transaction.type}}
 									</p>
+									<p class="text-end box-content-subheader fw-bold">
+										Current Balance: {{formatCurrency(transaction.balance)}}
+									</p>
 								</div>
 							</div>
 							<div
@@ -271,6 +274,9 @@
 											style="font-size: 20px"
 										>
 											{{transaction.type}}
+										</p>
+										<p class="text-end box-content-subheader fw-bold">
+											Current Balance: {{formatCurrency(transaction.balance)}}
 										</p>
 									</span>
 								</div>

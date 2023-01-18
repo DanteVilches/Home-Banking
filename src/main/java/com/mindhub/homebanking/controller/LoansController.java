@@ -81,8 +81,8 @@ public class LoansController {
         if(currentClient.getAccounts().stream().filter(account -> account.getNumber().equals(loan.getAccount())).collect(Collectors.toSet()).isEmpty()){
             return new ResponseEntity<>("You're not the owner of this account", HttpStatus.FORBIDDEN);
         }
-        ClientLoan newClientLoan = new ClientLoan(loan.getAmount()*1.20,loan.getPayments(), LocalDate.now());
-        Transaction newTransaction = new Transaction(TransactionType.CREDIT,loan.getAmount(), currentLoan.getName()+" "+"Loan approved",LocalDateTime.now());
+        ClientLoan newClientLoan = new ClientLoan(loan.getAmount()*(currentLoan.getInterestPercentage() * 0.01 + 1),loan.getPayments(), LocalDate.now());
+        Transaction newTransaction = new Transaction(TransactionType.CREDIT,loan.getAmount(), currentLoan.getName()+" "+"Loan approved",LocalDateTime.now(),currentAccount.getBalance()+loan.getAmount());
         currentAccount.setBalance(currentAccount.getBalance()+loan.getAmount());
 
         currentAccount.addTransaction(newTransaction);
