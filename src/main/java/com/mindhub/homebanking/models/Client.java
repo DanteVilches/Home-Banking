@@ -1,70 +1,109 @@
 package com.mindhub.homebanking.models;
-
-import com.mindhub.homebanking.repositories.ClientRepository;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 @Entity
 public class Client {
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO , generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "id_client")
-    private Long idClient;
+    private Long id;
 
-    @Column(name= "client_name")
-    private String clientName;
-    @Column(name= "client_last_name")
-    private String clientLastName;
+    private String firstName;
 
-    @Column(name= "client_email")
-    private String clientEmail;
+    private String lastName;
 
+    private String email;
 
-    public Long getIdClient() {
-        return idClient;
-    }
+    private String password;
 
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    private Set<Account> accounts = new HashSet<>();
 
-    public String getClientName() {
-        return clientName;
-    }
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    private Set<ClientLoan> clientLoans = new HashSet<>();
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getClientLastName() {
-        return clientLastName;
-    }
-
-    public void setClientLastName(String clientLastName) {
-        this.clientLastName = clientLastName;
-    }
-
-    public String getClientEmail() {
-        return clientEmail;
-    }
-
-    public void setClientEmail(String clientEmail) {
-        this.clientEmail = clientEmail;
-    }
-
-
-    public Client( String clientName, String clientLastName, String clientEmail) {
-        this.clientName = clientName;
-        this.clientLastName = clientLastName;
-        this.clientEmail = clientEmail;
-    }
-
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    private Set<Card> cards = new HashSet<>();
     public Client() {
     }
+    public Client( String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+    public Long getId() {
+        return id;
+    }
 
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void addAccount(Account account) {
+        account.setClient(this);
+        accounts.add(account);
+    }
+
+    public Set<ClientLoan> getClientLoans() {
+        return clientLoans;
+    }
+
+    public void addClientLoan(ClientLoan clientLoan) {
+        clientLoan.setClient(this);
+        clientLoans.add(clientLoan);
+    }
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void addCard(Card card) {
+        card.setClient(this);
+        cards.add(card);
+    }
+
+    public List<Loan> getLoans() {
+        return clientLoans.stream().map(loan -> loan.getLoan()).collect(Collectors.toList());
+    }
 
 }

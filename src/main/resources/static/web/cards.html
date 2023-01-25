@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cards | Mindhub Brothers</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="./styles/styleaccounts.css" />
+	</head>
+	<body>
+		<div class="app-container" id="app">
+			<div class="app-header">
+				<div class="app-header-left">
+					<img :src="logo" alt="" style="width: 64px" />
+					<p class="app-name fs-2">Mindhub Brothers</p>
+				</div>
+				<div class="app-header-mid">
+					<p class="tittle fs-2">Cards</p>
+				</div>
+				<div class="app-header-right">
+					<button class="mode-switch" title="Switch Theme" @click="changeLogoColor">
+						<svg
+							class="moon"
+							fill="none"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+						>
+							<defs></defs>
+							<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+						</svg>
+					</button>
+					<button class="profile-btn">
+						<!-- <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> -->
+						<span>{{clientName}}</span>
+					</button>
+					<div class="dropdown hamburgerMenu">
+						<button
+							class="btn btn-secondary dropdown-toggle"
+							type="button"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							Menu
+						</button>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li>
+								<a class="dropdown-item" href="./accounts.html">Accounts</a>
+							</li>
+							<li><a class="dropdown-item active" href="#">Credit Cards</a></li>
+							<li>
+								<a class="dropdown-item" href="./loan-application.html">Get a Loan</a>
+							</li>
+							<li><a class="dropdown-item" href="./transfers.html">Transfers</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li>
+								<a class="dropdown-item" href="#" @click.prevent="logOut">Log out</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="app-content">
+				<div class="sidebar">
+					<div class="app-sidebar">
+						<div class="sidebarLinks">
+							<a href="./accounts.html" class="app-sidebar-link">
+								<div class="ms-2">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										fill="currentColor"
+										class="bi bi-wallet2"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"
+										/>
+									</svg>
+								</div>
+								<div class="ms-2 me-3">Accounts</div>
+							</a>
+							<a href="" class="sidebarLinkActive"></a>
+						</div>
+						<div class="sidebarLinks w-100">
+							<a href="" class="app-sidebar-link active">
+								<div class="ms-2">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										fill="currentColor"
+										class="bi bi-credit-card"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"
+										/>
+										<path
+											d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"
+										/>
+									</svg>
+								</div>
+								<div class="ms-2 me-3">Credit cards</div>
+							</a>
+						</div>
+						<div class="sidebarLinks">
+							<a href="./loan-application.html" class="app-sidebar-link">
+								<div class="ms-2">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										fill="currentColor"
+										class="bi bi-cash-coin"
+										viewBox="0 0 16 16"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"
+										/>
+										<path
+											d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"
+										/>
+										<path
+											d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"
+										/>
+										<path
+											d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"
+										/>
+									</svg>
+								</div>
+								<div class="ms-2 me-3 getALoan">Geat a loan</div>
+							</a>
+						</div>
+						<div class="sidebarLinks">
+							<a href="./transfers.html" class="app-sidebar-link">
+								<div class="ms-2">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										fill="currentColor"
+										class="bi bi-currency-dollar"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
+										/>
+									</svg>
+								</div>
+								<div class="ms-2 me-3">Transfers</div>
+							</a>
+						</div>
+						<div class="d-flex flex-column sideBarLogOut">
+							<div class="sidebarLinks">
+								<a href="" class="app-sidebar-link" @click.prevent="logOut">
+									<div class="ms-2">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											fill="currentColor"
+											class="bi bi-box-arrow-left"
+											viewBox="0 0 16 16"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"
+											/>
+											<path
+												fill-rule="evenodd"
+												d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
+											/>
+										</svg>
+									</div>
+									<div class="ms-2 me-3">Logout</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="projects-section">
+					<div
+						class="projects-section-header d-flex justify-content-between"
+						v-if="cards.length < 6"
+					>
+						<div class="d-flex gap-2">
+							<button
+								type="button"
+								class="btn btn-secondary"
+								data-bs-toggle="modal"
+								data-bs-target="#createCardModal"
+							>
+								Add a new Card
+							</button>
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-toggle="modal"
+								data-bs-target="#createCardModal2"
+							>
+								Delete a card
+							</button>
+						</div>
+
+						<p class="time">{{Localtime}}</p>
+					</div>
+					<div
+						class="projects-section-header d-flex justify-content-between"
+						v-if="cards.length > 5"
+					>
+						<button
+							type="button"
+							class="btn btn-danger"
+							data-bs-toggle="modal"
+							data-bs-target="#createCardModal2"
+						>
+							Delete a card
+						</button>
+						<p class="time">{{Localtime}}</p>
+					</div>
+					<div class="modal" id="createCardModal2">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Delete a card</h1>
+								</div>
+								<div class="modal-body">
+									<div class="form-check" v-for="card in cards">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="flexRadioDefault"
+											id="flexRadioDefault1"
+											:value="card.id"
+											v-model="cardAboutToDelete"
+										/>
+										<label class="form-check-label" for="flexRadioDefault1">
+											({{card.number}}) | {{card.type}} | {{card.color}}
+										</label>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button
+										type="button"
+										class="btn btn-secondary"
+										data-bs-dismiss="modal"
+									>
+										Close
+									</button>
+									<button
+										type="button"
+										class="btn btn-primary"
+										@click.prevent="deleteCard"
+										data-bs-dismiss="modal"
+									>
+										Delete Card
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal" id="createCardModal">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel1">
+										Create a new Card
+									</h1>
+								</div>
+								<div class="modal-body">
+									<p>Card Type</p>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardType"
+											id="CREDIT"
+											value="CREDIT"
+											v-model="radioType"
+										/>
+										<label class="form-check-label" for="CREDIT"> Credit</label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardType"
+											id="DEBIT"
+											value="DEBIT"
+											v-model="radioType"
+										/>
+										<label class="form-check-label" for="DEBIT"> Debit </label>
+									</div>
+									<hr />
+									<p>Card Color</p>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardColor"
+											id="SILVER"
+											value="SILVER"
+											v-model="radioColor"
+										/>
+										<label class="form-check-label" for="SILVER"> Silver </label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardColor"
+											id="GOLD"
+											value="GOLD"
+											v-model="radioColor"
+										/>
+										<label class="form-check-label" for="GOLD"> Gold </label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="cardColor"
+											id="TITANIUM"
+											value="TITANIUM"
+											v-model="radioColor"
+										/>
+										<label class="form-check-label" for="TITANIUM"> Titanium </label>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button
+										type="button"
+										class="btn btn-secondary"
+										data-bs-dismiss="modal"
+									>
+										Close
+									</button>
+									<button
+										type="button"
+										class="btn btn-primary"
+										@click.prevent="createCard"
+										data-bs-dismiss="modal"
+									>
+										Create Card
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="d-flex justify-content-center gap-5 align-items-end h-100 flex-wrap"
+					>
+						<div class="d-flex flex-wrap flex-column" v-for="card in cards">
+							<p v-if="expiredDate(card.thruDate)" class="text-warning text-center">
+								This card has Expired
+							</p>
+							<div class="card creditCard animate__animated animate__slideInDown">
+								<div :class="'card__front card__parts ' +card.type+card.color">
+									<img
+										class="card__front-square card__square"
+										src="./images/holographicsquare.png"
+									/>
+									<img
+										class="card__front-logo card__logo"
+										src="./images/VISA-logo.png"
+									/>
+									<p class="card_numer textShadow">{{card.number}}</p>
+									<div class="card__space-75">
+										<span class="card__label textShadow"> {{card.type}}</span>
+										<p class="card__info textShadow">{{card.cardHolder}}</p>
+									</div>
+									<div class="card__space-25">
+										<span class="card__label textShadow">Expires</span>
+										<p class="card__info textShadow">
+											{{card.thruDate.slice(2,7).replace("-","/")}}
+										</p>
+									</div>
+								</div>
+								<div :class="'card__back  card__parts ' +card.type+card.color">
+									<div class="card__black-line"></div>
+									<div class="card__back-content">
+										<div class="card__secret">
+											<p class="card__secret--last">{{card.cvv}}</p>
+										</div>
+										<img
+											class="card__back-square card__square"
+											src="./images/holographicsquare.png"
+										/>
+
+										<img
+											class="card__back-logo card__logo"
+											src="./images/VISA-logo.png"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="project-boxes">
+						<div v-if="cards.length == 0">
+							<h1 class="tittle text-center mt-5 mb-5">
+								There are no cards on this client
+							</h1>
+						</div>
+					</div>
+					<div
+						id="carouselExampleFade"
+						class="carousel slide carousel-fade w-100 mt-5"
+						data-bs-ride="carousel"
+					>
+						<div class="carousel-inner w-100">
+							<div
+								class="carousel-item active d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel1.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel2.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel3.png" class="d-block" alt="..." />
+							</div>
+							<div
+								class="carousel-item d-flex justify-content-center"
+								data-bs-interval="3000"
+							>
+								<img src="./images/adCarousel4.png" class="d-block" alt="..." />
+							</div>
+						</div>
+					</div>
+
+					<footer class="mt-3 mb-3">
+						<div class="rounded-social-buttons">
+							<a
+								class="social-button facebook"
+								href="https://www.facebook.com/"
+								target="_blank"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a
+								class="social-button twitter"
+								href="https://www.twitter.com/"
+								target="_blank"
+								><i class="fab fa-twitter"></i
+							></a>
+							<a
+								class="social-button linkedin"
+								href="https://www.linkedin.com/in/dante-vilches-85646423b/"
+								target="_blank"
+								><i class="fab fa-linkedin"></i
+							></a>
+							<a
+								class="social-button youtube"
+								href="https://www.youtube.com/"
+								target="_blank"
+								><i class="fab fa-youtube"></i
+							></a>
+							<a
+								class="social-button instagram"
+								href="https://www.instagram.com/dantepilsen"
+								target="_blank"
+								><i class="fab fa-instagram"></i
+							></a>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+			crossorigin="anonymous"
+		></script>
+
+		<script src="sweetalert2.all.min.js"></script>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="./javascript/cards.js"></script>
+		<script
+			defer
+			src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
+			integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
