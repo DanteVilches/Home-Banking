@@ -71,7 +71,7 @@ Vue.createApp({
 		},
 		loadLoans() {
 			axios
-				.get("http://localhost:8080/api/loans")
+				.get("/api/loans")
 				.then((data) => {
 					this.loans = data.data;
 				})

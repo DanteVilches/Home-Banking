@@ -9,7 +9,7 @@ createApp({
 			inputName: "",
 			inputLastName: "",
 			inputEmail: "",
-			url: "http://localhost:8080/rest/clients",
+			url: "/rest/clients",
 		};
 	},
 	created() {
@@ -18,7 +18,7 @@ createApp({
 	methods: {
 		loadData() {
 			axios
-				.get("http://localhost:8080/api/clients")
+				.get("/api/clients")
 				.then((data) => {
 					this.backendJson = data.data;
 
@@ -81,7 +81,7 @@ createApp({
 						});
 					} */
 					axios
-						.delete("http://localhost:8080/rest/clients/" + client.id)
+						.delete("/rest/clients/" + client.id)
 						.then((response) => this.loadData());
 				}
 			});
@@ -119,7 +119,7 @@ createApp({
 				if (inputSwalFirstName && inputSwalLastName && inputSwalEmail) {
 					if (inputSwalEmail.includes("@") && inputSwalEmail.includes(".")) {
 						axios
-							.put("http://localhost:8080/rest/clients/" + client.id, this.client)
+							.put("/rest/clients/" + client.id, this.client)
 							.then((response) => this.loadData());
 
 						Swal.fire({
@@ -159,7 +159,7 @@ createApp({
 			let inputSwal = document.getElementById("swal-input").value;
 			const send = () => {
 				axios
-					.patch("http://localhost:8080/rest/clients/" + client.id, this.client)
+					.patch("/rest/clients/" + client.id, this.client)
 					.then((response) => this.loadData());
 				Swal.fire({
 					icon: "success",
