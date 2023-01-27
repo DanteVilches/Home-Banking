@@ -54,7 +54,7 @@ const app = createApp({
 	},
 	methods: {
 		loadAllAccounts() {
-			axios.get("./api/clients/current").then((json) => {
+			axios.get("/api/clients/current").then((json) => {
 				this.accounts = json.data.accountDTO.sort((a, b) => a.id - b.id);
 				this.account = this.accounts.find((account) => account.id == this.id);
 				this.accountName = this.account.number;
