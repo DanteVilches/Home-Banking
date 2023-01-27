@@ -41,9 +41,10 @@ public class TransactionController {
         Account originAccountFromRepository = accountService.getAccountByNumber(originAccount);
         Account destinationAccountFromRepository = accountService.getAccountByNumber(destinationAccount);
 
-        if (amount.isNaN() || amount == 0 || amount.isInfinite()){
+        if (amount.isNaN() || amount == 0 || amount.isInfinite() || amount < 0){
             return new ResponseEntity<>("The amount is incorrect", HttpStatus.FORBIDDEN);
         }
+
 
         if (description.isEmpty() ){
             return new ResponseEntity<>("The description field is empty", HttpStatus.FORBIDDEN);
