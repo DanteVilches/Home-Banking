@@ -14,7 +14,7 @@ public class CardUtilsTests {
 
         String cardNumber = CardUtils.createRandomCard();
 
-        assertThat(cardNumber,is(not(emptyOrNullString())));
+        assertThat(cardNumber, is(not(emptyOrNullString())));
 
     }
     @Test

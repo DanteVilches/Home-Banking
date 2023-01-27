@@ -3,7 +3,6 @@ package com.mindhub.homebanking.controller;
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.AccountType;
-import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.Client;
 
 import com.mindhub.homebanking.service.AccountService;
@@ -24,7 +23,6 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping("/api")
 public class AccountController {
-
 
     @Autowired
     private AccountService accountService;
@@ -63,7 +61,6 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
-
     @PatchMapping("/clients/current/accounts")
     ResponseEntity<Object> deleteAccount(Authentication authentication, @RequestParam Long id ){
         Client currentClient = clientService.getClientByEmail(authentication.getName());
@@ -82,8 +79,6 @@ public class AccountController {
         if (currentAccount.getEnabled().equals(false)){
             return new ResponseEntity<>("This account is already 'deleted' ", HttpStatus.FORBIDDEN);
         }
-
-
 
         currentAccount.setEnabled(false);
         accountService.saveAccount(currentAccount);

@@ -21,8 +21,10 @@ import java.util.List;
 public class HomebankingApplication {
 
 
+/*
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
@@ -36,7 +38,7 @@ public class HomebankingApplication {
 									  ClientLoanRepository clientLoanRepository,
 									  CardRepository cardRepository) {
 		return (args) -> {
-			Client melba = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("melba123"));
+		/*	Client melba = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("melba123"));
 			Client martin = new Client("Martin","Araolaza","martinaraolaza@mindhub.com",passwordEncoder.encode("martin123"));
 			Client lucy = new Client("Lucía","Vidal","luciavidal@mindhub.com",passwordEncoder.encode("lucy123"));
 			Client admin = new Client("admin","admin","admin@admin",passwordEncoder.encode("admin123"));
@@ -125,8 +127,7 @@ public class HomebankingApplication {
 			cardRepository.save(titaniumDebitCardMelba);
 			cardRepository.save(silverCreditCardMartin);
 
-
-
+*/
 
 
 		};
