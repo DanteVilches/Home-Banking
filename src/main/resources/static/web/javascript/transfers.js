@@ -2,7 +2,7 @@ Vue.createApp({
 	data() {
 		return {
 			Localtime: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
-			url: "http://localhost:8080/api/clients/current",
+			url: "/api/clients/current",
 			client: {},
 			clientName: "",
 			accounts: [],

@@ -47,7 +47,7 @@ const app = createApp({
 				document.documentElement.classList.add("dark");
 				modeSwitch.classList.add("active");
 			} else {
-				console.log("hola");
+
 				this.logo = "./images/bank logo black.png";
 				document.documentElement.classList.remove("dark");
 				modeSwitch.classList.remove("active");
