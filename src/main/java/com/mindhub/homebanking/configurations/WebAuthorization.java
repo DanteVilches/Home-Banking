@@ -32,6 +32,8 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/**").hasAuthority("CLIENT");
 
 
+
+
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -56,6 +58,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
 // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/index.html"));
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
