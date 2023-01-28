@@ -9,6 +9,7 @@ const app = createApp({
 			id: "",
 			radioType: "",
 			radioColor: "",
+
 			transactions: [],
 			accountName: "",
 			clientName: "",

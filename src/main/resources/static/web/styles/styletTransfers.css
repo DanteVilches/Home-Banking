@@ -899,7 +899,9 @@ body {
 	background-color: var(--main-color);
 	color: var(--app-container) !important;
 }
-
+[v-cloak] {
+	display: none;
+}
 .dropdown-menu-dark {
 	background-color: var(--main-color) !important;
 	color: var(--app-container) !important;

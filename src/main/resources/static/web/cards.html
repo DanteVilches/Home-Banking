@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="./styles/styleaccounts.css" />
 	</head>
 	<body>
-		<div class="app-container" id="app">
+		<div class="app-container" id="app" v-cloak>
 			<div class="app-header">
 				<div class="app-header-left">
 					<img :src="logo" alt="" style="width: 64px" />
@@ -196,6 +196,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="projects-section">
 					<div
 						class="projects-section-header d-flex justify-content-between"
@@ -367,6 +368,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div
 						class="d-flex justify-content-center gap-5 align-items-end h-100 flex-wrap"
 					>

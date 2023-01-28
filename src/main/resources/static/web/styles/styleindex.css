@@ -747,6 +747,9 @@ section .container.active .signinBx .imgBx {
 .dropdown-item {
 	color: var(--app-container) !important;
 }
+[v-cloak] {
+	display: none;
+}
 @media (max-width: 991px) {
 	section .container {
 		max-width: 400px;

@@ -15,7 +15,9 @@ body {
 .fcontent {
 	width: fit-content;
 }
-
+[v-cloak] {
+	display: none;
+}
 .divREST {
 	height: fit-content;
 	background-image: radial-gradient(
