@@ -372,7 +372,7 @@
 					<div
 						class="d-flex justify-content-center gap-5 align-items-end h-100 flex-wrap"
 					>
-						<div class="d-flex flex-wrap flex-column" v-for="card in cards">
+						<div v-cloak class="d-flex flex-wrap flex-column" v-for="card in cards">
 							<p v-if="expiredDate(card.thruDate)" class="text-warning text-center">
 								This card has Expired
 							</p>
