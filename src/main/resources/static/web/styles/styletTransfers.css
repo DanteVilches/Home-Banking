@@ -3,6 +3,9 @@
 * {
 	box-sizing: border-box;
 }
+[v-cloak] {
+	display: none;
+}
 
 :root {
 	--app-container: #f3f6fd;
