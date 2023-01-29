@@ -33,7 +33,6 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
 
 
-
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -47,9 +46,8 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 //disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
 
-// if user is not authenticated, just send an authentication failure response  request response exception
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
+        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/index.html"));
 // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
 
@@ -58,7 +56,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
 // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/index.html"));
+
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
@@ -67,4 +65,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
             session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         }
     }
+
+
 }
+
